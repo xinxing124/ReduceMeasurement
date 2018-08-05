@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReduceMeasurement", "ReduceMeasurement\ReduceMeasurement.vcproj", "{28B9D77F-AD55-4258-BB10-8698D628C5B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Pocket PC 2003 (ARMV4) = Debug|Pocket PC 2003 (ARMV4)
+		Debug|SMDK2416 (ARMV4I) = Debug|SMDK2416 (ARMV4I)
+		Release|Pocket PC 2003 (ARMV4) = Release|Pocket PC 2003 (ARMV4)
+		Release|SMDK2416 (ARMV4I) = Release|SMDK2416 (ARMV4I)
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|Pocket PC 2003 (ARMV4).ActiveCfg = Debug|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|Pocket PC 2003 (ARMV4).Build.0 = Debug|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|Pocket PC 2003 (ARMV4).Deploy.0 = Debug|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|SMDK2416 (ARMV4I).ActiveCfg = Debug|SMDK2416 (ARMV4I)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|SMDK2416 (ARMV4I).Build.0 = Debug|SMDK2416 (ARMV4I)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Debug|SMDK2416 (ARMV4I).Deploy.0 = Debug|SMDK2416 (ARMV4I)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|Pocket PC 2003 (ARMV4).ActiveCfg = Release|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|Pocket PC 2003 (ARMV4).Build.0 = Release|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|Pocket PC 2003 (ARMV4).Deploy.0 = Release|Pocket PC 2003 (ARMV4)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|SMDK2416 (ARMV4I).ActiveCfg = Release|SMDK2416 (ARMV4I)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|SMDK2416 (ARMV4I).Build.0 = Release|SMDK2416 (ARMV4I)
+		{28B9D77F-AD55-4258-BB10-8698D628C5B2}.Release|SMDK2416 (ARMV4I).Deploy.0 = Release|SMDK2416 (ARMV4I)
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
