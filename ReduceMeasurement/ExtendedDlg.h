@@ -1,21 +1,21 @@
-#pragma once
+ï»¿#pragma once
 
 
-// ExtendedDlg ¶Ô»°¿ò
+// ExtendedDlg å¯¹è¯æ¡†
 
 class ExtendedDlg : public CDialog
 {
 	DECLARE_DYNAMIC(ExtendedDlg)
 
 public:
-	ExtendedDlg(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	ExtendedDlg(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~ExtendedDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_EXTENDED_DIALOG };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 };

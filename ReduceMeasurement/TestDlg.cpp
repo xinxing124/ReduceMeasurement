@@ -1,4 +1,4 @@
-// TestDlg.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// TestDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "TestDlg.h"
 
 
-// CTestDlg ¶Ô»°¿ò
+// CTestDlg å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(CTestDlg, CDialog)
 
@@ -38,11 +38,11 @@ BEGIN_MESSAGE_MAP(CTestDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-// CTestDlg ÏûÏ¢´¦Àí³ÌĞò
+// CTestDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 void CTestDlg::OnBnClickedOk()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	SYSTEMTIME st;
 	CString strDate,strTime;
 	GetLocalTime(&st);
@@ -121,5 +121,5 @@ CString CTestDlg::ReturnPath(void)
 }
 void CTestDlg::OnBnClickedRadio1()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 }

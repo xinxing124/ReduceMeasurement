@@ -1,4 +1,4 @@
-// MyButton.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// MyButton.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -27,13 +27,13 @@ END_MESSAGE_MAP()
 
 
 
-// CMyButton ÏûÏ¢´¦Àí³ÌĞò
+// CMyButton æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
 
 void CMyButton::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 // TODO: Add your message handler code here and/or call default
 
 
@@ -44,7 +44,7 @@ void CMyButton::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CMyButton::OnLButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	CButton::OnLButtonUp(nFlags, point);
 	WPARAM wParam = (((DWORD)WM_LBUTTONUP) << 16) + ((DWORD)GetDlgCtrlID());
 	::SendMessage(this->GetParent()->GetSafeHwnd(),WM_COMMAND, wParam, 0);

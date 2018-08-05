@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 // CMyButton
@@ -19,10 +19,10 @@ public:
 };
 
 /*
-´°¿ÚÖĞÊ¹ÓÃÀàÏòµ¼Ìí¼ÓOnCommandÏûÏ¢
+çª—å£ä¸­ä½¿ç”¨ç±»å‘å¯¼æ·»åŠ OnCommandæ¶ˆæ¯
 BOOL CReduceMeasurementDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 {
-	// TODO: ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO: åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	if((LOWORD(wParam)) == IDC_BUT_LEFT)
 	{
 		if((HIWORD(wParam)) == WM_LBUTTONDOWN){

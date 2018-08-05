@@ -1,25 +1,25 @@
-#pragma once
+ï»¿#pragma once
 #include "resource.h"
 
-// CReduceMessageDlg ¶Ô»°¿ò
+// CReduceMessageDlg å¯¹è¯æ¡†
 
 class CReduceMessageDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CReduceMessageDlg)
 
 public:
-	CReduceMessageDlg(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CReduceMessageDlg(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CReduceMessageDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_REDUCEMESSAGE_DIALOG };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
-// ÊµÏÖ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+// å®ç°
 protected:
 	HICON m_hIcon;
-	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
+	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
 	virtual BOOL OnInitDialog();
 	#if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
 		afx_msg void OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/);

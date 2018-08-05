@@ -1,4 +1,4 @@
-
+ï»¿
 // The following ifdef block is the standard way of creating macros which make exporting 
 // from a DLL simpler. All files within this DLL are compiled with the HDI_API_EXPORTS
 // symbol defined on the command line. this symbol should not be defined on any project
@@ -53,75 +53,75 @@
 
 #define FM24CL64_SIZE		(8*1024 - 64)
 /**************************************************************************
-º¯ÊýÃû:API_GPIO_Output
-¹¦  ÄÜ:ÉèÖÃIO¿ÚµçÆ½
-²Î  Êý:ch,Í¨µÀºÅ,È¡Öµ0,1,2,3
-       level,1--¸ßµçÆ½;0--µÍµçÆ½
-·µ»ØÖµ:TRUE--ÉèÖÃ³É¹¦
-       FALSE--ÉèÖÃÊ§°Ü
+å‡½æ•°å:API_GPIO_Output
+åŠŸ  èƒ½:è®¾ç½®IOå£ç”µå¹³
+å‚  æ•°:ch,é€šé“å·,å–å€¼0,1,2,3
+       level,1--é«˜ç”µå¹³;0--ä½Žç”µå¹³
+è¿”å›žå€¼:TRUE--è®¾ç½®æˆåŠŸ
+       FALSE--è®¾ç½®å¤±è´¥
 **************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_GPIO_Output(UINT8 ch, UINT8 level);
 
 /**************************************************************************
-º¯ÊýÃû:API_GPIO_Input
-¹¦  ÄÜ:¶ÁÈ¡IO¿ÚµçÆ½
-²Î  Êý:ch,Í¨µÀºÅ,È¡Öµ0,1,2,3
-       pLevel,»º´æ
-·µ»ØÖµ:TRUE--¶ÁÈ¡³É¹¦
-       FALSE--¶ÁÈ¡Ê§°Ü
+å‡½æ•°å:API_GPIO_Input
+åŠŸ  èƒ½:è¯»å–IOå£ç”µå¹³
+å‚  æ•°:ch,é€šé“å·,å–å€¼0,1,2,3
+       pLevel,ç¼“å­˜
+è¿”å›žå€¼:TRUE--è¯»å–æˆåŠŸ
+       FALSE--è¯»å–å¤±è´¥
 **************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_GPIO_Input(UINT8 ch, UINT8* pLevel);
 
 /**************************************************************************
-º¯ÊýÃû:API_BEEP_Delay
-¹¦  ÄÜ:·äÃùÆ÷
-²Î  Êý:dwDelay,Ïì¶àÉÙºÁÃë
-·µ»ØÖµ:ÎÞ
+å‡½æ•°å:API_BEEP_Delay
+åŠŸ  èƒ½:èœ‚é¸£å™¨
+å‚  æ•°:dwDelay,å“å¤šå°‘æ¯«ç§’
+è¿”å›žå€¼:æ— 
 **************************************************************************/
 extern "C" _declspec(dllexport)void API_BEEP_Delay(DWORD dwDelay);
 
 /*****************************************************************************************
-º¯ÊýÃû:	API_WDT_Enable
-¹¦  ÄÜ:Æô¶¯¿´ÃÅ¹·
-·µ»ØÖµ:ÎÞ
+å‡½æ•°å:	API_WDT_Enable
+åŠŸ  èƒ½:å¯åŠ¨çœ‹é—¨ç‹—
+è¿”å›žå€¼:æ— 
 *****************************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_WDT_Enable(void);
 
 
 /*****************************************************************************************
-º¯ÊýÃû:API_WDT_Disable
-¹¦  ÄÜ:½ûÓÃ¿´ÃÅ¹·
-·µ»ØÖµ:ÎÞ
+å‡½æ•°å:API_WDT_Disable
+åŠŸ  èƒ½:ç¦ç”¨çœ‹é—¨ç‹—
+è¿”å›žå€¼:æ— 
 *****************************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_WDT_Disable(void);
 
 
 
 /*****************************************************************************************
-º¯ÊýÃû:API_WDT_SetTimeOut
-¹¦  ÄÜ:ÉèÖÃ¿´ÃÅ¹·³¬Ê±Ê±¼ä
-²Î  Êý:sec,µ¥Î»ÎªÃë,×î´óÖµÎª40Ãë
-·µ»ØÖµ:TRUE
+å‡½æ•°å:API_WDT_SetTimeOut
+åŠŸ  èƒ½:è®¾ç½®çœ‹é—¨ç‹—è¶…æ—¶æ—¶é—´
+å‚  æ•°:sec,å•ä½ä¸ºç§’,æœ€å¤§å€¼ä¸º40ç§’
+è¿”å›žå€¼:TRUE
        FALSE
 *****************************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_WDT_SetTimeOut(UINT8 sec);
 
 /*****************************************************************************************
-º¯ÊýÃû:API_WDT_Feed
-¹¦  ÄÜ:Î¹¹·
-·µ»ØÖµ:ÎÞ
-Ëµ  Ã÷:Èç¹ûÆô¶¯ÁË¿´ÃÅ¹·£¬ÔÚAPI_WDT_SetTimeOutÉèÖÃµÄSecÃëÄÚ²»Î¹¹·£¬ÔòÖØÐÂÆô¶¯ÏµÍ³¡£
-       Õý³£Çé¿öÏÂ£¬Èç¹ûÆô¶¯ÁË¿´ÃÅ¹·£¬±ØÐëÃ¿SecÃëÄÚÖÁÉÙÎ¹¹·£¬·ñÔò»áÖØÐÂÆô¶¯ÏµÍ³¡£
+å‡½æ•°å:API_WDT_Feed
+åŠŸ  èƒ½:å–‚ç‹—
+è¿”å›žå€¼:æ— 
+è¯´  æ˜Ž:å¦‚æžœå¯åŠ¨äº†çœ‹é—¨ç‹—ï¼Œåœ¨API_WDT_SetTimeOutè®¾ç½®çš„Secç§’å†…ä¸å–‚ç‹—ï¼Œåˆ™é‡æ–°å¯åŠ¨ç³»ç»Ÿã€‚
+       æ­£å¸¸æƒ…å†µä¸‹ï¼Œå¦‚æžœå¯åŠ¨äº†çœ‹é—¨ç‹—ï¼Œå¿…é¡»æ¯Secç§’å†…è‡³å°‘å–‚ç‹—ï¼Œå¦åˆ™ä¼šé‡æ–°å¯åŠ¨ç³»ç»Ÿã€‚
 *****************************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_WDT_Feed(void);
 /****************************************************************************************
-¹ØÓÚ¿´ÃÅ¹·µÄÊ¹ÓÃËµÃ÷:
-¡¾1¡¿ÔÚwinceÆô¶¯Ê±£¬¿´ÃÅ¹·Ä¬ÈÏÊÇ½ûÓÃµÄ
-¡¾2¡¿¿ªÆô¿´ÃÅ¹·³ÌÐòÁ÷³ÌÈçÏÂ
-1.SetWdtTimeOut(sec) -- ÈçsecµÈÓÚ10,20µÈ
-2.EnableWdt() -- Æô¶¯¿´ÃÅ¹·
-3.Ã¿secÃëÄÚ±ØÐëFeedWdt(),·ñÔò³¬»áÖØÆôÏµÍ³¡£
-¡¾4¡¿Èç¹û¿´ÃÅ¹·ÒÑÆô¶¯£¬DisableWdt()¿ÉÒÔ½ûÓÃ¿´ÃÅ¹·¹¦ÄÜ
+å…³äºŽçœ‹é—¨ç‹—çš„ä½¿ç”¨è¯´æ˜Ž:
+ã€1ã€‘åœ¨winceå¯åŠ¨æ—¶ï¼Œçœ‹é—¨ç‹—é»˜è®¤æ˜¯ç¦ç”¨çš„
+ã€2ã€‘å¼€å¯çœ‹é—¨ç‹—ç¨‹åºæµç¨‹å¦‚ä¸‹
+1.SetWdtTimeOut(sec) -- å¦‚secç­‰äºŽ10,20ç­‰
+2.EnableWdt() -- å¯åŠ¨çœ‹é—¨ç‹—
+3.æ¯secç§’å†…å¿…é¡»FeedWdt(),å¦åˆ™è¶…ä¼šé‡å¯ç³»ç»Ÿã€‚
+ã€4ã€‘å¦‚æžœçœ‹é—¨ç‹—å·²å¯åŠ¨ï¼ŒDisableWdt()å¯ä»¥ç¦ç”¨çœ‹é—¨ç‹—åŠŸèƒ½
 ****************************************************************************************/
 extern "C" _declspec(dllexport)BOOL API_PWM_SetDiv(UINT8 ch, UINT8 div);
 extern "C" _declspec(dllexport)BOOL API_PWM_Start(UINT8 ch, UINT32 cntb, UINT32 cmpb);

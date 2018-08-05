@@ -1,21 +1,21 @@
-#pragma once
+ï»¿#pragma once
 
 
-// CTestDlg ¶Ô»°¿ò
+// CTestDlg å¯¹è¯æ¡†
 
 class CTestDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CTestDlg)
 
 public:
-	CTestDlg(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CTestDlg(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CTestDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_TEST_DIALOG };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 public:

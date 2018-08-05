@@ -1,4 +1,4 @@
-// ReduceMessageDlg.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// ReduceMessageDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "ReduceMessageDlg.h"
 
 
-// CReduceMessageDlg ¶Ô»°¿ò
+// CReduceMessageDlg å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(CReduceMessageDlg, CDialog)
 
@@ -49,19 +49,19 @@ BOOL CReduceMessageDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO: ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 int ret=0;
 	CString strTmp;
 
 	
 	//ret=FileRead(_T("\\ResidentFlash2\\GUI\\xishu.txt"),&strTmp);
 
-	// TODO:  ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯
+	// TODO:  åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–
 	SYSTEMTIME st;
 	CString strDate,strTime;
 	GetLocalTime(&st);
@@ -69,15 +69,15 @@ int ret=0;
 	//strTime.Format("%2d:%2d:2d", st.wHour,st.wMinute,st.wSecond);
 	/*
 	//if(::GetFileAttributes(_T("\\ResidentFlash2\\GUI\\") +strDate +_T(".txt")) == 0xFFFFFFFF){
-	if(::GetFileAttributes(_T("\\Ó²ÅÌ\\") +strDate +_T(".txt")) == 0xFFFFFFFF){
+	if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\") +strDate +_T(".txt")) == 0xFFFFFFFF){
 		existfile=false;
-		m_Temp=_T("Õ¾Ãû;¹ìÕíºÅ;ÀàĞÍ;µÀ²íºÅ;²âÁ¿Öµ\r\n");
+		m_Temp=_T("ç«™å;è½¨æ•å·;ç±»å‹;é“å²”å·;æµ‹é‡å€¼\r\n");
 	}
 	else{
 		existfile=true;
 		//FileRead(_T("\\ResidentFlash2\\GUI\\") +strDate +_T(".txt"),&m_Temp);
 		m_Temp=_T("");
-		FileRead(_T("\\Ó²ÅÌ\\") +strDate +_T(".txt"),&m_Temp);
+		FileRead(_T("\\ç¡¬ç›˜\\") +strDate +_T(".txt"),&m_Temp);
 	}
 	*/
 	/*
@@ -107,7 +107,7 @@ int ret=0;
 	Split(theApp.AppParameterContent,souce,_T("}"));
 //AfxExtractSubString
 	CString strTemp;
-	((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();//Ïû³ıÏÖÓĞËùÓĞÄÚÈİ
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();//æ¶ˆé™¤ç°æœ‰æ‰€æœ‰å†…å®¹
 	
 
 int Count = souce.GetSize();
@@ -154,18 +154,18 @@ for(int i=0;i<Count-1;i++)
 //strTemp.Mid(1);
 
 /*
-	Èç£º //¿Ø¼şÄÚÈİ³õÊ¼»¯
+	å¦‚ï¼š //æ§ä»¶å†…å®¹åˆå§‹åŒ–
  CString strTemp;
- ((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();//Ïû³ıÏÖÓĞËùÓĞÄÚÈİ
+ ((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();//æ¶ˆé™¤ç°æœ‰æ‰€æœ‰å†…å®¹
  for(int i=1;i<=100;i++)
  {
   strTemp.Format("%d",i);
   ((CComboBox*)GetDlgItem(IDC_COMBO_CF))->AddString(strTemp);
  }
-3£¬ÏÂÀ­µÄÊ±ºòÌí¼Ó
-Èç£º CString strTemp;
- int iCount=((CComboBox*)GetDlgItem(IDC_COMBO_CF))->GetCount();//È¡µÃÄ¿Ç°ÒÑ¾­ÓĞµÄĞĞÊı
- if(iCount<1)//·ÀÖ¹ÖØ¸´¶à´ÎÌí¼Ó
+3ï¼Œä¸‹æ‹‰çš„æ—¶å€™æ·»åŠ 
+å¦‚ï¼š CString strTemp;
+ int iCount=((CComboBox*)GetDlgItem(IDC_COMBO_CF))->GetCount();//å–å¾—ç›®å‰å·²ç»æœ‰çš„è¡Œæ•°
+ if(iCount<1)//é˜²æ­¢é‡å¤å¤šæ¬¡æ·»åŠ 
  {
   ((CComboBox*)GetDlgItem(IDC_COMBO_CF))->ResetContent();
   for(int i=1;i<=100;i++)
@@ -176,7 +176,7 @@ for(int i=0;i<Count-1;i++)
  }
 */
 	((CButton*)GetDlgItem(IDC_BUT_SAVE))->EnableWindow(false);
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 #if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
@@ -194,17 +194,17 @@ void CReduceMeasurementDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 }
 #endif
 
-// CReduceMessageDlg ÏûÏ¢´¦Àí³ÌĞò
+// CReduceMessageDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 void CReduceMessageDlg::OnBnClickedOk()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	SYSTEMTIME st;
 	CString strDate,strTime;
 	GetLocalTime(&st);
 	strDate.Format(_T("%4d%02d%02d"),st.wYear,st.wMonth,st.wDay);
 	
-	//Ñ¡Ôñ¼ÇÂ¼
+	//é€‰æ‹©è®°å½•
 	theApp.AppComboIndex_01=((CComboBox*)GetDlgItem(IDC_COMBO1))->GetCurSel();
 	theApp.AppComboIndex_02=((CComboBox*)GetDlgItem(IDC_COMBO2))->GetCurSel();
 	theApp.AppComboIndex_03=((CComboBox*)GetDlgItem(IDC_COMBO3))->GetCurSel();
@@ -216,30 +216,30 @@ void CReduceMessageDlg::OnBnClickedOk()
 	//((CComboBox*)GetDlgItem(IDC_COMBO3))->GetWindowTextW(strTemp_03);
 	//((CComboBox*)GetDlgItem(IDC_COMBO4))->GetWindowTextW(strTemp_04);
 	//strTemp_05.Format(_T("%.3f"),theApp.Val);
-	//theApp.AppFilePath= _T("\\Ó²ÅÌ\\") +strDate +_T(".txt");
+	//theApp.AppFilePath= _T("\\ç¡¬ç›˜\\") +strDate +_T(".txt");
 	//theApp.AppFilePath= theApp.AppStoragePath +strDate +_T(".txt");
 	
 	//if(::GetFileAttributes(theApp.AppFilePath) == 0xFFFFFFFF){	
-	//	m_Temp=_T("Î»ÖÃ±êÊ¶\tµÀ²í±àºÅ\t²âÁ¿Î»ÖÃ(m)\t±ê×¼Öµ(mm)\t²âÁ¿Öµ(mm)\t²îÖµ(mm)\r\n");
+	//	m_Temp=_T("ä½ç½®æ ‡è¯†\té“å²”ç¼–å·\tæµ‹é‡ä½ç½®(m)\tæ ‡å‡†å€¼(mm)\tæµ‹é‡å€¼(mm)\tå·®å€¼(mm)\r\n");
 	//}
 	//else{
 	//	m_Temp=_T("");
 	//}
-	////		Î»ÖÃ±êÊ¶			µÀ²í±àºÅ			²âÁ¿Î»ÖÃ			±ê×¼Öµ				²âÁ¿Öµ				²îÖµ
+	////		ä½ç½®æ ‡è¯†			é“å²”ç¼–å·			æµ‹é‡ä½ç½®			æ ‡å‡†å€¼				æµ‹é‡å€¼				å·®å€¼
 	//m_Temp+=strTemp_01+_T("\t")+strTemp_02+_T("\t")+strTemp_03+_T("\t")+strTemp_04+_T("\t")+strTemp_05+_T("\t")+strTemp_06+_T("\r\n");
 	////FileWrite(_T("\\ResidentFlash2\\GUI\\") +strDate +_T(".txt"),m_Temp);
 	//FileWrite(theApp.AppFilePath,m_Temp);
 
 	CString str;
-	//str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\n",theApp.AppStandardVal,theApp.AppMeasurementVal);
-	str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º0.0\n",theApp.AppStandardVal);
+	//str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\n",theApp.AppStandardVal,theApp.AppMeasurementVal);
+	str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š0.0\n",theApp.AppStandardVal);
 	this->GetParent()->GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 	OnOK();
 }
 
 void CReduceMessageDlg::OnBnClickedCancel()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	OnCancel();
 }
 
@@ -248,7 +248,7 @@ int CReduceMessageDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CDialog::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	// TODO:  ÔÚ´ËÌí¼ÓÄú×¨ÓÃµÄ´´½¨´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ æ‚¨ä¸“ç”¨çš„åˆ›å»ºä»£ç 
 	return 0;
 }
 
@@ -256,17 +256,17 @@ void CReduceMessageDlg::OnDestroy()
 {
 	CDialog::OnDestroy();
 
-	// TODO: ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
 }
 
 void CReduceMessageDlg::OnCbnSelchangeCombo2()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 }
 
 void CReduceMessageDlg::OnCbnDropdownCombo2()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 		CStringArray souce;
 	CStringArray dest;
 	Split(theApp.AppParameterContent,souce,_T("}"));
@@ -284,7 +284,7 @@ for(int i=0;i<Count;i++)
 
 	if(i==((CComboBox*)GetDlgItem(IDC_COMBO1))->GetCurSel())
 	{
-		((CComboBox*)GetDlgItem(IDC_COMBO2))->ResetContent();//Ïû³ıÏÖÓĞËùÓĞÄÚÈİ
+		((CComboBox*)GetDlgItem(IDC_COMBO2))->ResetContent();//æ¶ˆé™¤ç°æœ‰æ‰€æœ‰å†…å®¹
 		for(int j=1;j<nCount;j+=2)
 		{
 		//((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(dest[j].Mid(1));
@@ -296,41 +296,41 @@ for(int i=0;i<Count;i++)
 
 }
 
-//Ğ´ÈëÎÄ¼ş
+//å†™å…¥æ–‡ä»¶
 int CReduceMessageDlg::FileWrite(CString filename=_T(""),CString content=_T(""))
 {
-	HANDLE hFile = INVALID_HANDLE_VALUE;	// ÎÄ¼ş¾ä±ú 
-	// ´´½¨Ò»¸öÎÄ¼ş»ò´ò¿ªÒ»¸öÎÄ¼ş
+	HANDLE hFile = INVALID_HANDLE_VALUE;	// æ–‡ä»¶å¥æŸ„ 
+	// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶æˆ–æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	hFile = CreateFile(filename, GENERIC_READ | GENERIC_WRITE, 0, 
 					   NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		//AfxMessageBox(_T("´´½¨ÎÄ¼şÊ§°Ü!"));
+		//AfxMessageBox(_T("åˆ›å»ºæ–‡ä»¶å¤±è´¥!"));
 		return -1;
 	}
 
 	DWORD len,actlen;
 	char *pcharbuff;
 
-	//len = content.GetLength();							// È¡µÃÊäÈë×Ö·û´®µÄ³¤¶È
+	//len = content.GetLength();							// å–å¾—è¾“å…¥å­—ç¬¦ä¸²çš„é•¿åº¦
 	len=CStringA(content).GetLength();
 
 	pcharbuff = new char[len];
-	LPTSTR pStr = content.GetBuffer(len);					// È¡µÃÊäÈë×Ö·û´®µÄ»º³åÇøÖ¸Õë
+	LPTSTR pStr = content.GetBuffer(len);					// å–å¾—è¾“å…¥å­—ç¬¦ä¸²çš„ç¼“å†²åŒºæŒ‡é’ˆ
 
-	// ½« Unicode µÄ CString ×ª»»Îª char ĞÍ
+	// å°† Unicode çš„ CString è½¬æ¢ä¸º char å‹
 	WideCharToMultiByte(CP_ACP, 0, pStr, len, pcharbuff, len, NULL, NULL);
 	content.ReleaseBuffer();
 
-	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_END);	// ÒÆ¶¯ÎÄ¼şÖ¸Õëµ½ÎÄ¼ş¿ªÍ·
+	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_END);	// ç§»åŠ¨æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å¼€å¤´
 	if (ret == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("½«ÎÄ¼şÖ¸ÕëÒÆÖÁÎÄ¼ş¿ªÍ·Ê§°Ü!"));
+		//AfxMessageBox(_T("å°†æ–‡ä»¶æŒ‡é’ˆç§»è‡³æ–‡ä»¶å¼€å¤´å¤±è´¥!"));
 		delete[] pcharbuff;
 		return -2;	
 	}
 
-	ret = WriteFile(hFile, pcharbuff, len, &actlen, NULL);	// ½«Êı¾İĞ´ÈëÎÄ¼şÖĞ 
+	ret = WriteFile(hFile, pcharbuff, len, &actlen, NULL);	// å°†æ•°æ®å†™å…¥æ–‡ä»¶ä¸­ 
 	
 	if (pcharbuff != NULL) 
 		delete[] pcharbuff;
@@ -338,61 +338,61 @@ int CReduceMessageDlg::FileWrite(CString filename=_T(""),CString content=_T(""))
 	CloseHandle(hFile);
 	if (ret == TRUE)
 		return 0;
-		//AfxMessageBox(_T("Ğ´ÎÄ¼ş³É¹¦!"));	
+		//AfxMessageBox(_T("å†™æ–‡ä»¶æˆåŠŸ!"));	
 	else
 		return -3;
-		//AfxMessageBox(_T("Ğ´ÎÄ¼şÊ§°Ü!"));	
+		//AfxMessageBox(_T("å†™æ–‡ä»¶å¤±è´¥!"));	
 }
 
 int CReduceMessageDlg::FileRead(CString filename,CString* content)
 {
 	int lRet;
-	HANDLE hFile = INVALID_HANDLE_VALUE;	// ÎÄ¼ş¾ä±ú 
+	HANDLE hFile = INVALID_HANDLE_VALUE;	// æ–‡ä»¶å¥æŸ„ 
 	if(::GetFileAttributes(filename) == 0xFFFFFFFF)
 	{
-	//::AfxMessageBox(_T("ÎÄ¼ş²»´æÔÚ"));
+	//::AfxMessageBox(_T("æ–‡ä»¶ä¸å­˜åœ¨"));
 		return -5;
 	}
-	// ´´½¨Ò»¸öÎÄ¼ş»ò´ò¿ªÒ»¸öÎÄ¼ş
+	// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶æˆ–æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	hFile = CreateFile(filename, GENERIC_READ | GENERIC_WRITE, 0, 
 					   NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		//AfxMessageBox(_T("´ò¿ªÎÄ¼şÊ§°Ü!"));
+		//AfxMessageBox(_T("æ‰“å¼€æ–‡ä»¶å¤±è´¥!"));
 		return -1;
 	}
 
 	DWORD filelen,actlen;
 	char *pcharbuff;
 	
-	filelen = GetFileSize(hFile, NULL);							// »ñÈ¡ÎÄ¼ş´óĞ¡
+	filelen = GetFileSize(hFile, NULL);							// è·å–æ–‡ä»¶å¤§å°
 	if (filelen == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("»ñÈ¡ÎÄ¼ş´óĞ¡Ê§°Ü!"));
+		//AfxMessageBox(_T("è·å–æ–‡ä»¶å¤§å°å¤±è´¥!"));
 		return -2;	
 	}
 
-	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_BEGIN);		// ÒÆ¶¯ÎÄ¼şÖ¸Õëµ½ÎÄ¼ş¿ªÍ·
+	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_BEGIN);		// ç§»åŠ¨æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å¼€å¤´
 	if (ret == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("½«ÎÄ¼şÖ¸ÕëÒÆÖÁÎÄ¼ş¿ªÍ·Ê§°Ü!"));
+		//AfxMessageBox(_T("å°†æ–‡ä»¶æŒ‡é’ˆç§»è‡³æ–‡ä»¶å¼€å¤´å¤±è´¥!"));
 		return -3;	
 	}
 
 	pcharbuff = new char[filelen];
-	ret = ReadFile(hFile, pcharbuff, filelen, &actlen, NULL);	// ´ÓÎÄ¼şÖĞ¶Á³öÊı¾İ 
+	ret = ReadFile(hFile, pcharbuff, filelen, &actlen, NULL);	// ä»æ–‡ä»¶ä¸­è¯»å‡ºæ•°æ® 
 	if (ret == TRUE)
 	{
 		LPTSTR pStr = content->GetBuffer(filelen);	
-		// ½«×Ö½Ú×ª»¯Îª Unicode ×Ö·û´®
+		// å°†å­—èŠ‚è½¬åŒ–ä¸º Unicode å­—ç¬¦ä¸²
 		MultiByteToWideChar(CP_ACP, 0, pcharbuff, filelen, pStr, filelen);
 		content->ReleaseBuffer();
-		//AfxMessageBox(_T("¶ÁÎÄ¼ş³É¹¦!"));	
+		//AfxMessageBox(_T("è¯»æ–‡ä»¶æˆåŠŸ!"));	
 		lRet=0;
 	}
 	else
 	{
-		//AfxMessageBox(_T("¶ÁÎÄ¼şÊ§°Ü!"));	
+		//AfxMessageBox(_T("è¯»æ–‡ä»¶å¤±è´¥!"));	
 		lRet=-4;
 	}
 
@@ -423,28 +423,28 @@ void CReduceMessageDlg::Split(CString source, CStringArray& dest, CString divisi
 }
 void CReduceMessageDlg::OnCbnSelchangeCombo3()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 }
 
 void CReduceMessageDlg::OnCbnSelchangeCombo1()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 }
 
 void CReduceMessageDlg::OnCbnDropdownCombo3()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 
 }
 
 void CReduceMessageDlg::OnCbnSelchangeCombo4()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 }
 
 void CReduceMessageDlg::OnCbnDropdownCombo4()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	CStringArray souce;
 	CStringArray dest;
 	CStringArray soucest;
@@ -496,7 +496,7 @@ void CReduceMessageDlg::OnCbnDropdownCombo4()
 									Split(soucest[m],destst,_T(";"));
 									Split(destst[k+1],deststr,_T(","));
 									nNum = deststr.GetSize();
-									((CComboBox*)GetDlgItem(IDC_COMBO4))->ResetContent();//Ïû³ıÏÖÓĞËùÓĞÄÚÈİ
+									((CComboBox*)GetDlgItem(IDC_COMBO4))->ResetContent();//æ¶ˆé™¤ç°æœ‰æ‰€æœ‰å†…å®¹
 									for(int n=0;n<nNum;n+=2)
 									{
 										((CComboBox*)GetDlgItem(IDC_COMBO4))->AddString(deststr[n]);
@@ -593,6 +593,6 @@ void CReduceMessageDlg::OnCbnCloseupCombo4()
 	{
 
 	}
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	TRACE0( "¡­¡­\n"  );
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	TRACE0( "â€¦â€¦\n"  );
 }

@@ -1,4 +1,4 @@
-// ReduceMeasurementDlg.h : Í·ÎÄ¼ş
+ï»¿// ReduceMeasurementDlg.h : å¤´æ–‡ä»¶
 //
 
 #pragma once
@@ -6,24 +6,24 @@
 #include "afxwin.h"
 #include "MyButton.h"
 
-// CReduceMeasurementDlg ¶Ô»°¿ò
+// CReduceMeasurementDlg å¯¹è¯æ¡†
 class CReduceMeasurementDlg : public CDialog
 {
-// ¹¹Ôì
+// æ„é€ 
 public:
-	CReduceMeasurementDlg(CWnd* pParent = NULL);	// ±ê×¼¹¹Ôìº¯Êı
+	CReduceMeasurementDlg(CWnd* pParent = NULL);	// æ ‡å‡†æ„é€ å‡½æ•°
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_REDUCEMEASUREMENT_DIALOG };
 
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Ö§³Ö
-// ÊµÏÖ
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
+// å®ç°
 protected:
 	HICON m_hIcon;
 
-	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
+	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
 	virtual BOOL OnInitDialog();
 #if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
 	afx_msg void OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/);
@@ -38,16 +38,16 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnClose();
 private:
-	//Ïß³Ìº¯Êı
+	//çº¿ç¨‹å‡½æ•°
     static  DWORD WINAPI ThreadFunc(LPVOID lparam);
-	//¹Ø±Õ¶ÁÏß³Ì
+	//å…³é—­è¯»çº¿ç¨‹
 	void CloseThread();
 private:
-	//¶ÁÏß³Ì¾ä±ú
+	//è¯»çº¿ç¨‹å¥æŸ„
 	HANDLE m_hThread;
-	//¶ÁÏß³ÌID±êÊ¶
+	//è¯»çº¿ç¨‹IDæ ‡è¯†
 	DWORD m_dwThreadID;
-	//ÔËĞĞÍ£Ö¹±êÊ¶
+	//è¿è¡Œåœæ­¢æ ‡è¯†
 	DWORD m_dwRunFlag;
 public:
 	CCESeries *m_pSerial;
@@ -60,7 +60,7 @@ public:
 
 	double GetValue(void);
 	afx_msg void OnStnClickedStcImage();
-	// Õâ¸öÊÇÈ«¾ÖµÄ¡£·Åµ½includeµÄÏÂÃæ¾Í¿ÉÒÔÁË
+	// è¿™ä¸ªæ˜¯å…¨å±€çš„ã€‚æ”¾åˆ°includeçš„ä¸‹é¢å°±å¯ä»¥äº†
 	CFont cfont;
 	CFont ccfont;
 	afx_msg void OnBnClickedButTest();

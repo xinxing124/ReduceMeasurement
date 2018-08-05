@@ -1,4 +1,4 @@
-// ExtendedDlg.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// ExtendedDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "ExtendedDlg.h"
 
 
-// ExtendedDlg ¶Ô»°¿ò
+// ExtendedDlg å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(ExtendedDlg, CDialog)
 
@@ -30,4 +30,4 @@ BEGIN_MESSAGE_MAP(ExtendedDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-// ExtendedDlg ÏûÏ¢´¦Àí³ÌĞò
+// ExtendedDlg æ¶ˆæ¯å¤„ç†ç¨‹åº

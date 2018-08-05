@@ -1,4 +1,4 @@
-// ReduceMeasurementDlg.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// ReduceMeasurementDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -13,9 +13,9 @@
 #define new DEBUG_NEW
 #endif
 
-// CReduceMeasurementDlg ¶Ô»°¿ò
+// CReduceMeasurementDlg å¯¹è¯æ¡†
 #define pi 3.1415926535898
-//¶ÁÏß³ÌÍË³öÊÂ¼ş
+//è¯»çº¿ç¨‹é€€å‡ºäº‹ä»¶
 HANDLE g_hDetIOEvent;
 CArray <double> m_Array;
 int m_Start=0;
@@ -25,8 +25,8 @@ int CW=0;
 extern BYTE* pRecvBuf;
 extern long pRecvLen;
 
-CDC MemDC; //Ê×ÏÈ¶¨ÒåÒ»¸öÏÔÊ¾Éè±¸¶ÔÏó
-CBitmap MemBitmap;//¶¨ÒåÒ»¸öÎ»Í¼¶ÔÏó
+CDC MemDC; //é¦–å…ˆå®šä¹‰ä¸€ä¸ªæ˜¾ç¤ºè®¾å¤‡å¯¹è±¡
+CBitmap MemBitmap;//å®šä¹‰ä¸€ä¸ªä½å›¾å¯¹è±¡
 CBitmap *pOldBit;
 
 CReduceMeasurementDlg::CReduceMeasurementDlg(CWnd* pParent /*=NULL*/)
@@ -72,11 +72,11 @@ BEGIN_MESSAGE_MAP(CReduceMeasurementDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUT_OPEN, &CReduceMeasurementDlg::OnBnClickedButOpen)
 END_MESSAGE_MAP()
 
-//¹Ø±Õ¶ÁÏß³Ì
+//å…³é—­è¯»çº¿ç¨‹
 void CReduceMeasurementDlg::CloseThread()
 {
 	SetEvent(g_hDetIOEvent);
-    //µÈ´ı4Ãë£¬Èç¹û¶ÁÏß³ÌÃ»ÓĞÍË³ö£¬ÔòÇ¿ÖÆÍË³ö
+    //ç­‰å¾…4ç§’ï¼Œå¦‚æœè¯»çº¿ç¨‹æ²¡æœ‰é€€å‡ºï¼Œåˆ™å¼ºåˆ¶é€€å‡º
     if (WaitForSingleObject(m_hThread,4000) == WAIT_TIMEOUT)
 	{
 		TerminateThread(m_hThread,0);
@@ -84,7 +84,7 @@ void CReduceMeasurementDlg::CloseThread()
 	m_hThread = NULL;
 }
 
-// CReduceMeasurementDlg ÏûÏ¢´¦Àí³ÌĞò
+// CReduceMeasurementDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 /*
 DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 {
@@ -105,14 +105,14 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 	hDlg->FlagCount=0;
 	while (TRUE)
 	{   	
-		//Èç¹ûÊÕµ½¶ÁÏß³ÌÍË³öĞÅºÅ£¬ÔòÍË³öÏß³Ì
+		//å¦‚æœæ”¶åˆ°è¯»çº¿ç¨‹é€€å‡ºä¿¡å·ï¼Œåˆ™é€€å‡ºçº¿ç¨‹
 		dwRet=WaitForSingleObject(g_hDetIOEvent,50);
-		if (dwRet== WAIT_OBJECT_0)//µ÷ÊÔÄ£Ê½
+		if (dwRet== WAIT_OBJECT_0)//è°ƒè¯•æ¨¡å¼
 		{
 			//::AfxMessageBox(_T("1"));
 			break;
 		}
-		if ( dwRet== WAIT_TIMEOUT)//ÎŞ·µ»Ø³¬Ê±
+		if ( dwRet== WAIT_TIMEOUT)//æ— è¿”å›è¶…æ—¶
 		{
 			break;
 		}
@@ -126,7 +126,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			if(hDlg->ExcFlag==2)
 			{
 				Sleep(0);
-				API_GPIO_Input(1,&Level);//¶Á·½ÏòĞÅºÅ
+				API_GPIO_Input(1,&Level);//è¯»æ–¹å‘ä¿¡å·
 				if(Level==0)
 				{
 					Sleep(100);
@@ -135,15 +135,15 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 					API_GPIO_Output(0,1);
 					Sleep(1);
 					API_GPIO_Output(1,0);
-					m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+					m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 					hDlg->ExcFlag=1;
-					TRACE0( "·´ÏòĞÅºÅ¡­¡­\n"  );
+					TRACE0( "åå‘ä¿¡å·â€¦â€¦\n"  );
 				}
 			}
 			else if(hDlg->ExcFlag==1)
 			{
 				Sleep(0);
-				API_GPIO_Input(2,&Level);//¶ÁÍ£Ö¹ĞÅºÅ
+				API_GPIO_Input(2,&Level);//è¯»åœæ­¢ä¿¡å·
 				if(Level==0)
 				{       
 					Sleep(100);
@@ -154,16 +154,16 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 
 					API_GPIO_Output(0,0);
 					API_GPIO_Output(1,0);
-					str.Format(L"²É¼¯ÊıÁ¿£º%d\n",hDlg->FlagCount);
+					str.Format(L"é‡‡é›†æ•°é‡ï¼š%d\n",hDlg->FlagCount);
 					hDlg->GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 					TRACE(_T("%s"),str);
 					hDlg->Invalidate();
-					TRACE0( "Í£Ö¹ĞÅºÅ¡­¡­\n"  );
+					TRACE0( "åœæ­¢ä¿¡å·â€¦â€¦\n"  );
 				}
 				else
 				{
 					Sleep(0);
-					API_GPIO_Input(0,&Level);//¶Á²É¼¯ĞÅºÅ
+					API_GPIO_Input(0,&Level);//è¯»é‡‡é›†ä¿¡å·
 					if(Level==0 && DropFlag==true)
 					{
 						DropFlag=false;
@@ -199,7 +199,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			}
 
 			//////CW=1;
-			//////API_GPIO_Input(2,&Level);//¶ÁÍ£Ö¹ĞÅºÅ
+			//////API_GPIO_Input(2,&Level);//è¯»åœæ­¢ä¿¡å·
 			//////if(Level==1)
 			//////{       
 			//////	Sleep(100);
@@ -208,7 +208,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//////	API_GPIO_Output(0,0);
 			//////	API_GPIO_Output(1,0);
 			//////	CW=0;
-			//////	str.Format(L"²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d",hDlg->FlagCount,Num);
+			//////	str.Format(L"é‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d",hDlg->FlagCount,Num);
 			//////	TRACE(_T("%s"),str);
 			//////	hDlg->FlagCount=0;
 			//////	hDlg->Invalidate();
@@ -219,12 +219,12 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//////	//	TRACE(_T("%s"),ss);
 			//////	//	//str.Append(ss);
 			//////	//}
-			//////	//str1.append (str2);   //½«str2Á¬½Óµ½str1ºó
+			//////	//str1.append (str2);   //å°†str2è¿æ¥åˆ°str1å
 			//////	//TRACE(_T("%s"),str);
-			//////	TRACE0( "Í£Ö¹ĞÅºÅ¡­¡­\n"  );
+			//////	TRACE0( "åœæ­¢ä¿¡å·â€¦â€¦\n"  );
 
 			//////}
-			//////API_GPIO_Input(1,&Level);//¶Á·½ÏòĞÅºÅ
+			//////API_GPIO_Input(1,&Level);//è¯»æ–¹å‘ä¿¡å·
 			//////if(Level==1)
 			//////{
 			//////	revbuf=pSerial->Command((BYTE*)buf,sizeof(buf),&revlen);
@@ -235,16 +235,16 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//////	API_GPIO_Output(0,0);
 			//////	API_GPIO_Output(1,1);
 			//////	hDlg->FlagCount=0;
-			//////	m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+			//////	m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 			//////	//hDlg->Invalidate();
 			//////	hDlg->m_SendCout=0;
-			//////	TRACE0( "·´ÏòĞÅºÅ¡­¡­\n"  );
+			//////	TRACE0( "åå‘ä¿¡å·â€¦â€¦\n"  );
 			//////}
 
 			//if(CW==1)
 			//{
 			//	Sleep(0);
-			//	API_GPIO_Input(0,&Level);//¶Á²É¼¯ĞÅºÅ
+			//	API_GPIO_Input(0,&Level);//è¯»é‡‡é›†ä¿¡å·
 			//	if(Level==0 && DropFlag==true)
 			//	{
 			//		DropFlag=false;
@@ -308,7 +308,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 					////if(CW==1)
 					////{
 					//
-					////str.Format(L"²É¼¯ĞòºÅ£º%d\n",hDlg->FlagCount);
+					////str.Format(L"é‡‡é›†åºå·ï¼š%d\n",hDlg->FlagCount);
 					////TRACE(_T("%s"),str);
 					//m_Array.Add(data);
 					//hDlg->Invalidate();
@@ -354,14 +354,14 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 	hDlg->FlagCount=0;
 	while (TRUE)
 	{   	
-		//Èç¹ûÊÕµ½¶ÁÏß³ÌÍË³öĞÅºÅ£¬ÔòÍË³öÏß³Ì
+		//å¦‚æœæ”¶åˆ°è¯»çº¿ç¨‹é€€å‡ºä¿¡å·ï¼Œåˆ™é€€å‡ºçº¿ç¨‹
 		dwRet=WaitForSingleObject(g_hDetIOEvent,50);
-		if (dwRet== WAIT_OBJECT_0)//µ÷ÊÔÄ£Ê½
+		if (dwRet== WAIT_OBJECT_0)//è°ƒè¯•æ¨¡å¼
 		{
 			//::AfxMessageBox(_T("1"));
 			break;
 		}
-		if ( dwRet== WAIT_TIMEOUT)//ÎŞ·µ»Ø³¬Ê±
+		if ( dwRet== WAIT_TIMEOUT)//æ— è¿”å›è¶…æ—¶
 		{
 			break;
 		}
@@ -373,7 +373,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 		if(hDlg->RunFlag==2)
 		{
 			//CW=1;
-			//API_GPIO_Input(2,&Level);//¶ÁÍ£Ö¹ĞÅºÅ
+			//API_GPIO_Input(2,&Level);//è¯»åœæ­¢ä¿¡å·
 			//if(Level==1)
 			//{       
 			//	Sleep(100);
@@ -382,7 +382,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//	API_GPIO_Output(0,0);
 			//	API_GPIO_Output(1,0);
 			//	CW=0;
-			//	str.Format(L"²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d",hDlg->FlagCount,Num);
+			//	str.Format(L"é‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d",hDlg->FlagCount,Num);
 			//	TRACE(_T("%s"),str);
 			//	hDlg->FlagCount=0;
 			//	hDlg->Invalidate();
@@ -393,12 +393,12 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//	//	TRACE(_T("%s"),ss);
 			//	//	//str.Append(ss);
 			//	//}
-			//	//str1.append (str2);   //½«str2Á¬½Óµ½str1ºó
+			//	//str1.append (str2);   //å°†str2è¿æ¥åˆ°str1å
 			//	//TRACE(_T("%s"),str);
-			//	TRACE0( "Í£Ö¹ĞÅºÅ¡­¡­\n"  );
+			//	TRACE0( "åœæ­¢ä¿¡å·â€¦â€¦\n"  );
 
 			//}
-			//API_GPIO_Input(1,&Level);//¶Á·½ÏòĞÅºÅ
+			//API_GPIO_Input(1,&Level);//è¯»æ–¹å‘ä¿¡å·
 			//if(Level==1)
 			//{
 			//	revbuf=pSerial->Command((BYTE*)buf,sizeof(buf),&revlen);
@@ -409,15 +409,15 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 			//	API_GPIO_Output(0,0);
 			//	API_GPIO_Output(1,1);
 			//	hDlg->FlagCount=0;
-			//	m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+			//	m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 			//	//hDlg->Invalidate();
 			//	hDlg->m_SendCout=0;
-			//	TRACE0( "·´ÏòĞÅºÅ¡­¡­\n"  );
+			//	TRACE0( "åå‘ä¿¡å·â€¦â€¦\n"  );
 			//}
 			if(CW==1)
 			{
 				Sleep(0);
-				API_GPIO_Input(0,&Level);//¶Á²É¼¯ĞÅºÅ
+				API_GPIO_Input(0,&Level);//è¯»é‡‡é›†ä¿¡å·
 				if(Level==0 && DropFlag==true)
 				{
 					DropFlag=false;
@@ -481,7 +481,7 @@ DWORD CReduceMeasurementDlg::ThreadFunc(LPVOID lparam)
 					////if(CW==1)
 					////{
 					//
-					////str.Format(L"²É¼¯ĞòºÅ£º%d\n",hDlg->FlagCount);
+					////str.Format(L"é‡‡é›†åºå·ï¼š%d\n",hDlg->FlagCount);
 					////TRACE(_T("%s"),str);
 					//m_Array.Add(data);
 					//hDlg->Invalidate();
@@ -688,7 +688,7 @@ int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int start1,int
 
 
 
-	//È¡µÃÍ¼ĞÎÆğµã
+	//å–å¾—å›¾å½¢èµ·ç‚¹
 	for(i=start1+1;i<finish1-1;i++)
 	{
 		//if(fabs(dTemp[i-2]-(-327.67))<0.001 &&fabs(dTemp[i-1]-(-327.67))<0.001 &&fabs(dTemp[i]-(-327.67))<0.001&&fabs(dTemp[i+1]-(-327.67))<0.001&&fabs(dTemp[i+2]-(-327.67))<0.001)
@@ -755,14 +755,14 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO: ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 	CWnd*  pWnd=NULL;
-	cfont.CreateFont(36,        //Õâ¸öÊı×Ö¾ÍÊÇ×ÖÌå´óĞ¡ÁË
+	cfont.CreateFont(36,        //è¿™ä¸ªæ•°å­—å°±æ˜¯å­—ä½“å¤§å°äº†
 		  0,0,0,FW_NORMAL,  
 		  FALSE,FALSE,  
 		  0,  
@@ -775,7 +775,7 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 		pWnd->SetFont(&cfont);
 
  
-	//ccfont.CreateFont(24,        //Õâ¸öÊı×Ö¾ÍÊÇ×ÖÌå´óĞ¡ÁË
+	//ccfont.CreateFont(24,        //è¿™ä¸ªæ•°å­—å°±æ˜¯å­—ä½“å¤§å°äº†
 	//  0,0,0,FW_NORMAL,  
 	//  FALSE,FALSE,  
 	//  0,  
@@ -783,25 +783,25 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 	//  OUT_DEFAULT_PRECIS,        // nOutPrecision
 	//  CLIP_DEFAULT_PRECIS,       // nClipPrecision
 	//  DEFAULT_QUALITY,           // nQuality
-	//  DEFAULT_PITCH | FF_SWISS, L"ËÎÌå");//Arial
+	//  DEFAULT_PITCH | FF_SWISS, L"å®‹ä½“");//Arial
 	//pWnd = GetDlgItem(IDC_STC_CONTENT);
 	//pWnd->SetFont(&ccfont);
 
-	if(::GetFileAttributes(_T("\\Ó²ÅÌ\\parameter.txt")) != 0xFFFFFFFF)
-		::CopyFile(_T("\\Ó²ÅÌ\\parameter.txt"),ReturnPath()  +_T("parameter.txt"),false);
-	if(::GetFileAttributes(_T("\\Ó²ÅÌ\\standard.txt")) != 0xFFFFFFFF)
-		::CopyFile(_T("\\Ó²ÅÌ\\standard.txt"),ReturnPath()  +_T("standard.txt"),false);
-	if(::GetFileAttributes(_T("\\Ó²ÅÌ\\position.txt")) != 0xFFFFFFFF)
-			::CopyFile(_T("\\Ó²ÅÌ\\position.txt"),ReturnPath()  +_T("position.txt"),false);
-	if(::GetFileAttributes(_T("\\Ó²ÅÌ\\angle.txt")) != 0xFFFFFFFF)
-			::CopyFile(_T("\\Ó²ÅÌ\\other.txt"),ReturnPath()  +_T("other.txt"),false);
+	if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\parameter.txt")) != 0xFFFFFFFF)
+		::CopyFile(_T("\\ç¡¬ç›˜\\parameter.txt"),ReturnPath()  +_T("parameter.txt"),false);
+	if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\standard.txt")) != 0xFFFFFFFF)
+		::CopyFile(_T("\\ç¡¬ç›˜\\standard.txt"),ReturnPath()  +_T("standard.txt"),false);
+	if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\position.txt")) != 0xFFFFFFFF)
+			::CopyFile(_T("\\ç¡¬ç›˜\\position.txt"),ReturnPath()  +_T("position.txt"),false);
+	if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\angle.txt")) != 0xFFFFFFFF)
+			::CopyFile(_T("\\ç¡¬ç›˜\\other.txt"),ReturnPath()  +_T("other.txt"),false);
 
 	FileRead(ReturnPath()  +_T("parameter.txt"),&theApp.AppParameterContent);
 	FileRead(ReturnPath()  +_T("standard.txt"),&theApp.AppStandardContent);
 	FileRead(ReturnPath()  +_T("position.txt"),&theApp.AppPositionContent);
 	FileRead(ReturnPath()  +_T("other.txt"),&theApp.AppOtherContent);
 
-	//´ò¿ªÎÄ¼ş
+	//æ‰“å¼€æ–‡ä»¶
 	double val,vTmp;
 	CString content;
 	CStringArray dest;
@@ -823,11 +823,11 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
  //   FileFlt += _T("||");
  //   CFileDialog FileDlg(TRUE,NULL,NULL,OFN_HIDEREADONLY,FileFlt,this,0);
  //   FileDlg.m_ofn.lpstrInitialDir = ReturnPath();
- //   FileDlg.m_ofn.lpstrTitle = L"ÇëÑ¡ÔñÊı¾İÎÄ¼ş...";
+ //   FileDlg.m_ofn.lpstrTitle = L"è¯·é€‰æ‹©æ•°æ®æ–‡ä»¶...";
  //   INT_PTR nResponse = FileDlg.DoModal();
  //   if(nResponse == IDCANCEL)
  //       return false;
-	////filePath = FileDlg.GetPathName();   // filePath¼´ÎªËù´ò¿ªµÄÎÄ¼şµÄÂ·¾¶  
+	////filePath = FileDlg.GetPathName();   // filePathå³ä¸ºæ‰€æ‰“å¼€çš„æ–‡ä»¶çš„è·¯å¾„  
 	//
 	//AfxMessageBox(FileDlg.GetPathName());
 
@@ -931,7 +931,7 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 			theApp.AppMeasurementVal.Format(L"%.3f",v3);
 			theApp.AppDifferenceVal.Format(L"%.3f",v3-v4);
 
-			str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\n²âÁ¿²î£º%s\nµÚÒ»µã£º%d\nµÚ¶şµã£º%d\nµÚÒ»µãÖµ£º%.3f\nµÚ¶şµãÖµ£º%.3f\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2,FlagCount,m_SendCout);
+			str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\næµ‹é‡å·®ï¼š%s\nç¬¬ä¸€ç‚¹ï¼š%d\nç¬¬äºŒç‚¹ï¼š%d\nç¬¬ä¸€ç‚¹å€¼ï¼š%.3f\nç¬¬äºŒç‚¹å€¼ï¼š%.3f\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2,FlagCount,m_SendCout);
 			GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 			TRACE(_T("%s"),str);
 			
@@ -975,17 +975,17 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 //theApp.AppPosFinish=s2; 
 
 //CString str;
-//str.Format(L"ÆğÊ¼Î»£º%d\n½áÊøÎ»£º%d\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppPosStart,theApp.AppPosFinish,FlagCount,m_SendCout);
+//str.Format(L"èµ·å§‹ä½ï¼š%d\nç»“æŸä½ï¼š%d\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppPosStart,theApp.AppPosFinish,FlagCount,m_SendCout);
 //GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 
 		//double v1,v2;
 		//v2=GetMaxValue(&m_Array,s1,s2);
 		//v1=GetMaxValue(&m_Array,s1-150,s1);
 
-	//if(::GetFileAttributes(_T("\\Ó²ÅÌ\\parameter.txt")) != 0xFFFFFFFF)
-	//	::CopyFile(_T("\\Ó²ÅÌ\\parameter.txt"),_T("\\ResidentFlash2\\GUI\\parameter.txt"),false);
-	//if(::GetFileAttributes(_T("\\Ó²ÅÌ\\standard.txt")) != 0xFFFFFFFF)
-	//	::CopyFile(_T("\\Ó²ÅÌ\\standard.txt"),_T("\\ResidentFlash2\\GUI\\standard.txt"),false);
+	//if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\parameter.txt")) != 0xFFFFFFFF)
+	//	::CopyFile(_T("\\ç¡¬ç›˜\\parameter.txt"),_T("\\ResidentFlash2\\GUI\\parameter.txt"),false);
+	//if(::GetFileAttributes(_T("\\ç¡¬ç›˜\\standard.txt")) != 0xFFFFFFFF)
+	//	::CopyFile(_T("\\ç¡¬ç›˜\\standard.txt"),_T("\\ResidentFlash2\\GUI\\standard.txt"),false);
 
 	//FileRead(_T("\\ResidentFlash2\\GUI\\parameter.txt"),&theApp.AppParameterContent);
 	//FileRead(_T("\\ResidentFlash2\\GUI\\standard.txt"),&theApp.AppStandardContent);
@@ -1006,19 +1006,19 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 	API_GPIO_Output(2, 0);
 	API_GPIO_Output(3, 1);
 
-	//ĞÂ½¨´®¿ÚÍ¨Ñ¶¶ÔÏó
+	//æ–°å»ºä¸²å£é€šè®¯å¯¹è±¡
 	m_pSerial = new CCESeries();
 	//m_pSerial->m_OnSeriesRead = OnSerialRead;
 
-	//´ò¿ª´®¿Ú  9600
+	//æ‰“å¼€ä¸²å£  9600
 	if(m_pSerial->OpenPort(this,3,115200,0,8,0,0))
 	{
-		//AfxMessageBox(L"´®¿Ú´ò¿ª³É¹¦");
+		//AfxMessageBox(L"ä¸²å£æ‰“å¼€æˆåŠŸ");
 		Sleep(200);
 	}
 	else
 	{
-		AfxMessageBox(L"´®¿Ú´ò¿ªÊ§°Ü");
+		AfxMessageBox(L"ä¸²å£æ‰“å¼€å¤±è´¥");
 	}
 	
 	m_hThread = CreateThread(NULL,0,ThreadFunc,this,0,&m_dwThreadID);
@@ -1031,18 +1031,18 @@ BOOL CReduceMeasurementDlg::OnInitDialog()
 	int nWidth=rect.right;
 	int nHeight=rect.bottom ;
 
-	//Ëæºó½¨Á¢ÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÄÚ´æÏÔÊ¾Éè±¸
+	//éšåå»ºç«‹ä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡
 MemDC.CreateCompatibleDC(NULL);
-//ÕâÊ±»¹²»ÄÜ»æÍ¼£¬ÒòÎªÃ»ÓĞµØ·½»­ ^_^
-//ÏÂÃæ½¨Á¢Ò»¸öÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÎ»Í¼£¬ÖÁÓÚÎ»Í¼µÄ´óĞ¡Âï£¬¿ÉÒÔÓÃ´°¿ÚµÄ´óĞ¡
+//è¿™æ—¶è¿˜ä¸èƒ½ç»˜å›¾ï¼Œå› ä¸ºæ²¡æœ‰åœ°æ–¹ç”» ^_^
+//ä¸‹é¢å»ºç«‹ä¸€ä¸ªä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„ä½å›¾ï¼Œè‡³äºä½å›¾çš„å¤§å°å˜›ï¼Œå¯ä»¥ç”¨çª—å£çš„å¤§å°
 //MemBitmap.CreateCompatibleBitmap(pDC,nWidth,nHeight);
 MemBitmap.CreateBitmap(nWidth*10,nHeight*10,1,16,NULL);
 //MemBitmap.CreateBitmap(nWidth,nHeight,1,16,NULL);
-//½«Î»Í¼Ñ¡Èëµ½ÄÚ´æÏÔÊ¾Éè±¸ÖĞ
-//Ö»ÓĞÑ¡ÈëÁËÎ»Í¼µÄÄÚ´æÏÔÊ¾Éè±¸²ÅÓĞµØ·½»æÍ¼£¬»­µ½Ö¸¶¨µÄÎ»Í¼ÉÏ
+//å°†ä½å›¾é€‰å…¥åˆ°å†…å­˜æ˜¾ç¤ºè®¾å¤‡ä¸­
+//åªæœ‰é€‰å…¥äº†ä½å›¾çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡æ‰æœ‰åœ°æ–¹ç»˜å›¾ï¼Œç”»åˆ°æŒ‡å®šçš„ä½å›¾ä¸Š
 pOldBit=MemDC.SelectObject(&MemBitmap);
-//ÏÈÓÃ±³¾°É«½«Î»Í¼Çå³ı¸É¾»£¬ÕâÀïÎÒÓÃµÄÊÇ°×É«×÷Îª±³¾°
-//ÄãÒ²¿ÉÒÔÓÃ×Ô¼ºÓ¦¸ÃÓÃµÄÑÕÉ«
+//å…ˆç”¨èƒŒæ™¯è‰²å°†ä½å›¾æ¸…é™¤å¹²å‡€ï¼Œè¿™é‡Œæˆ‘ç”¨çš„æ˜¯ç™½è‰²ä½œä¸ºèƒŒæ™¯
+//ä½ ä¹Ÿå¯ä»¥ç”¨è‡ªå·±åº”è¯¥ç”¨çš„é¢œè‰²
 MemDC.FillSolidRect(0,0,nWidth*10,nHeight*10,RGB(255,255,255));
 
 srand(GetTickCount());
@@ -1054,7 +1054,7 @@ srand(GetTickCount());
 	::SetCursorPos(iFullHeight,iFullWidth);
 	ShowCursor(FALSE);
 
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 #if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
@@ -1075,8 +1075,8 @@ void CReduceMeasurementDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 
 void CReduceMeasurementDlg::OnBnClickedButExit()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	//m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	//m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 
 	////m_hThread = CreateThread(NULL,0,ThreadFunc,this,0,&m_dwThreadID);
 
@@ -1092,8 +1092,8 @@ void CReduceMeasurementDlg::OnBnClickedButExit()
 	//INT_PTR nResponse = dlg.DoModal();
 	//if (nResponse == IDOK)
 	//{
-	//	// TODO: ÔÚ´Ë·ÅÖÃ´¦ÀíºÎÊ±ÓÃ
-	//	//  ¡°È·¶¨¡±À´¹Ø±Õ¶Ô»°¿òµÄ´úÂë
+	//	// TODO: åœ¨æ­¤æ”¾ç½®å¤„ç†ä½•æ—¶ç”¨
+	//	//  â€œç¡®å®šâ€æ¥å…³é—­å¯¹è¯æ¡†çš„ä»£ç 
 	//}
 
 
@@ -1104,7 +1104,7 @@ void CReduceMeasurementDlg::OnBnClickedButExit()
 
 void CReduceMeasurementDlg::OnBnClickedButSave()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	//CWnd   *pWnd   =   GetDlgItem(IDC_STC_IMAGE);     
 	//RECT   rect;  
 	//pWnd->GetClientRect(&rect);  
@@ -1131,7 +1131,7 @@ void CReduceMeasurementDlg::OnBnClickedButSave()
 	CString strDate,strTime;
 	GetLocalTime(&st);
 
-	 //if(MessageBox(_T("ÊÇ·ñÒª±£´æ±¾×éÊı¾İ£¿"),_T("±£´æ"),MB_YESNO||MB_ICONQUESTION)==IDYES)
+	 //if(MessageBox(_T("æ˜¯å¦è¦ä¿å­˜æœ¬ç»„æ•°æ®ï¼Ÿ"),_T("ä¿å­˜"),MB_YESNO||MB_ICONQUESTION)==IDYES)
 	 //{
 		CString m_Str=_T(""),m_Tmp=_T("");
 		wchar_t   *stopstring;
@@ -1143,12 +1143,12 @@ void CReduceMeasurementDlg::OnBnClickedButSave()
 			//this->MessageBoxW(L"SSS");
 				
 				if(::GetFileAttributes(theApp.AppFilePath) == 0xFFFFFFFF){
-					m_Str=_T("Î»ÖÃ±êÊ¶\tµÀ²í±àºÅ\t²âÁ¿Î»ÖÃ(m)\t±ê×¼Öµ(mm)\t²âÁ¿Öµ(mm)\t²îÖµ(mm)\r\n");
+					m_Str=_T("ä½ç½®æ ‡è¯†\té“å²”ç¼–å·\tæµ‹é‡ä½ç½®(m)\tæ ‡å‡†å€¼(mm)\tæµ‹é‡å€¼(mm)\tå·®å€¼(mm)\r\n");
 				}
 				else{
 					m_Str=_T("");
 				}
-				//		Î»ÖÃ±êÊ¶			µÀ²í±àºÅ			²âÁ¿Î»ÖÃ			±ê×¼Öµ				²âÁ¿Öµ				²îÖµ
+				//		ä½ç½®æ ‡è¯†			é“å²”ç¼–å·			æµ‹é‡ä½ç½®			æ ‡å‡†å€¼				æµ‹é‡å€¼				å·®å€¼
 				m_Tmp.Format(_T("%f"),wcstod(theApp.AppMeasurementVal,&stopstring)-wcstod(theApp.AppStandardVal,&stopstring));
 				m_Str+=theApp.AppIdentification +_T("\t")+theApp.AppTurnoutNumber +_T("\t")+theApp.AppMeasurementPos +_T("\t")+theApp.AppStandardVal +_T("\t")+theApp.AppMeasurementVal +_T("\t")+m_Tmp+_T("\r\n");
 				//FileWrite(_T("\\ResidentFlash2\\GUI\\") +strDate +_T(".txt"),m_Temp);
@@ -1175,16 +1175,16 @@ void CReduceMeasurementDlg::OnBnClickedButSave()
 			strTime.Format(_T("_%d_%d_%s"),theApp.AppMeasurementTypeIndex, theApp.AppMeasurementPosIndex,theApp.AppFigureNumber);   
 		}
 	//FileWrite(ReturnPath() +strDate + strTime +_T(".txt"),m_Temp);
-	//FileWrite(_T("\\Ó²ÅÌ\\") +strDate + strTime +_T(".txt"),m_Temp);
+	//FileWrite(_T("\\ç¡¬ç›˜\\") +strDate + strTime +_T(".txt"),m_Temp);
 	FileWrite(theApp.AppStoragePath +strDate + strTime +_T(".txt"),m_Temp);
 		
-	//FileWrite(_T("\\Ó²ÅÌ\\") +strDate +_T(".txt"),m_Temp);
-	MessageBoxW(L"µ±Ç°±£´æÎÄ¼şÎª£º" +strDate,L"±êÌâ", MB_ICONEXCLAMATION|MB_YESNO);
+	//FileWrite(_T("\\ç¡¬ç›˜\\") +strDate +_T(".txt"),m_Temp);
+	MessageBoxW(L"å½“å‰ä¿å­˜æ–‡ä»¶ä¸ºï¼š" +strDate,L"æ ‡é¢˜", MB_ICONEXCLAMATION|MB_YESNO);
 	Invalidate();
 	}
 	else
 	{
-		if(MessageBoxW(L"²âÊÔÊı¾İÎª¿Õ,ÖØĞÂ²âÊÔ£¡",L"±êÌâ", MB_ICONEXCLAMATION|MB_YESNO)==IDYES)
+		if(MessageBoxW(L"æµ‹è¯•æ•°æ®ä¸ºç©º,é‡æ–°æµ‹è¯•ï¼",L"æ ‡é¢˜", MB_ICONEXCLAMATION|MB_YESNO)==IDYES)
 			OnBnClickedButTest();
 	}
 
@@ -1210,10 +1210,10 @@ void CReduceMeasurementDlg::OnBnClickedButSave()
 void CReduceMeasurementDlg::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
-	// TODO: ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
-	// ²»Îª»æÍ¼ÏûÏ¢µ÷ÓÃ CDialog::OnPaint()
+	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// ä¸ä¸ºç»˜å›¾æ¶ˆæ¯è°ƒç”¨ CDialog::OnPaint()
 	//CString str;
-	//str.Format(_T("²âÁ¿Öµ£º\n%d\n·¢ËÍÁ¿£º\n%d"),(int)m_Array.GetSize(),m_SendCout); 
+	//str.Format(_T("æµ‹é‡å€¼ï¼š\n%d\nå‘é€é‡ï¼š\n%d"),(int)m_Array.GetSize(),m_SendCout); 
 	//GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 	//dc.SetGraphicsMode .SetWorldTransform .GetViewportExt
 
@@ -1233,30 +1233,30 @@ void CReduceMeasurementDlg::OnPaint()
 
 	//pWnd->Invalidate();  
 	
-//CDC MemDC; //Ê×ÏÈ¶¨ÒåÒ»¸öÏÔÊ¾Éè±¸¶ÔÏó
-//CBitmap MemBitmap;//¶¨ÒåÒ»¸öÎ»Í¼¶ÔÏó
-////Ëæºó½¨Á¢ÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÄÚ´æÏÔÊ¾Éè±¸
+//CDC MemDC; //é¦–å…ˆå®šä¹‰ä¸€ä¸ªæ˜¾ç¤ºè®¾å¤‡å¯¹è±¡
+//CBitmap MemBitmap;//å®šä¹‰ä¸€ä¸ªä½å›¾å¯¹è±¡
+////éšåå»ºç«‹ä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡
 //MemDC.CreateCompatibleDC(NULL);
-////ÕâÊ±»¹²»ÄÜ»æÍ¼£¬ÒòÎªÃ»ÓĞµØ·½»­ ^_^
-////ÏÂÃæ½¨Á¢Ò»¸öÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÎ»Í¼£¬ÖÁÓÚÎ»Í¼µÄ´óĞ¡Âï£¬¿ÉÒÔÓÃ´°¿ÚµÄ´óĞ¡
+////è¿™æ—¶è¿˜ä¸èƒ½ç»˜å›¾ï¼Œå› ä¸ºæ²¡æœ‰åœ°æ–¹ç”» ^_^
+////ä¸‹é¢å»ºç«‹ä¸€ä¸ªä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„ä½å›¾ï¼Œè‡³äºä½å›¾çš„å¤§å°å˜›ï¼Œå¯ä»¥ç”¨çª—å£çš„å¤§å°
 //MemBitmap.CreateCompatibleBitmap(pDC,nWidth,nHeight);
-////½«Î»Í¼Ñ¡Èëµ½ÄÚ´æÏÔÊ¾Éè±¸ÖĞ
-////Ö»ÓĞÑ¡ÈëÁËÎ»Í¼µÄÄÚ´æÏÔÊ¾Éè±¸²ÅÓĞµØ·½»æÍ¼£¬»­µ½Ö¸¶¨µÄÎ»Í¼ÉÏ
+////å°†ä½å›¾é€‰å…¥åˆ°å†…å­˜æ˜¾ç¤ºè®¾å¤‡ä¸­
+////åªæœ‰é€‰å…¥äº†ä½å›¾çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡æ‰æœ‰åœ°æ–¹ç»˜å›¾ï¼Œç”»åˆ°æŒ‡å®šçš„ä½å›¾ä¸Š
 //CBitmap *pOldBit=MemDC.SelectObject(&MemBitmap);
-////ÏÈÓÃ±³¾°É«½«Î»Í¼Çå³ı¸É¾»£¬ÕâÀïÎÒÓÃµÄÊÇ°×É«×÷Îª±³¾°
-////ÄãÒ²¿ÉÒÔÓÃ×Ô¼ºÓ¦¸ÃÓÃµÄÑÕÉ«
+////å…ˆç”¨èƒŒæ™¯è‰²å°†ä½å›¾æ¸…é™¤å¹²å‡€ï¼Œè¿™é‡Œæˆ‘ç”¨çš„æ˜¯ç™½è‰²ä½œä¸ºèƒŒæ™¯
+////ä½ ä¹Ÿå¯ä»¥ç”¨è‡ªå·±åº”è¯¥ç”¨çš„é¢œè‰²
 //MemDC.FillSolidRect(0,0,nWidth,nHeight,RGB(255,255,255));
-////»æÍ¼
+////ç»˜å›¾
 //MemDC.MoveTo(0 ,nHeight/4); 
 //MemDC.LineTo(nWidth ,nHeight/4);
-////½«ÄÚ´æÖĞµÄÍ¼¿½±´µ½ÆÁÄ»ÉÏ½øĞĞÏÔÊ¾
+////å°†å†…å­˜ä¸­çš„å›¾æ‹·è´åˆ°å±å¹•ä¸Šè¿›è¡Œæ˜¾ç¤º
 //pDC->BitBlt(0,0,nWidth,nHeight,&MemDC,0,0,SRCCOPY);
-////»æÍ¼Íê³ÉºóµÄÇåÀí
+////ç»˜å›¾å®Œæˆåçš„æ¸…ç†
 //MemBitmap.DeleteObject(); 
 //MemDC.SelectObject(pOldBit);
 //MemDC.DeleteDC();
 
-//		//»æÍ¼
+//		//ç»˜å›¾
 //MemDC.MoveTo(0 ,nHeight/4); 
 //MemDC.LineTo(nWidth ,nHeight/4);
 //MemDC.MoveTo(0 ,0); 
@@ -1264,7 +1264,7 @@ void CReduceMeasurementDlg::OnPaint()
 //{
 //MemDC.LineTo(i*2 ,rand()%50);
 //}
-////½«ÄÚ´æÖĞµÄÍ¼¿½±´µ½ÆÁÄ»ÉÏ½øĞĞÏÔÊ¾
+////å°†å†…å­˜ä¸­çš„å›¾æ‹·è´åˆ°å±å¹•ä¸Šè¿›è¡Œæ˜¾ç¤º
 //pDC->BitBlt(0,0,nWidth,nHeight,&MemDC,0,0,SRCCOPY);
 ////pDC->StretchBlt(0,0,nWidth,nHeight,&MemDC,0,0,nWidth,nHeight,SRCCOPY);
 
@@ -1272,13 +1272,13 @@ void CReduceMeasurementDlg::OnPaint()
 ////	PAINTSTRUCT paintStruct;
 ////    pWnd->BeginPaint(&paintStruct);
 ////
-////	CDC dcMem;                                                  //ÓÃÓÚ»º³å×÷Í¼µÄÄÚ´æDC
-////	CBitmap bmp;                                                 //ÄÚ´æÖĞ³ĞÔØÁÙÊ±Í¼ÏóµÄÎ»Í¼
-////	dcMem.CreateCompatibleDC(pDC);               //ÒÀ¸½´°¿ÚDC´´½¨¼æÈİÄÚ´æDC
-////	bmp.CreateCompatibleBitmap(&dcMem,rect.right*1000,rect.bottom*1000);//´´½¨¼æÈİÎ»Í¼
-////	dcMem.SelectObject(&bmp);                          //½«Î»Í¼Ñ¡Ôñ½øÄÚ´æDC
-////	dcMem.FillSolidRect(&rect,pDC->GetBkColor());//°´Ô­À´±³¾°Ìî³ä¿Í»§Çø£¬²»È»»áÊÇºÚÉ«
-////	//for(int i=20;i>0;i--)                                          //ÔÚÄÚ´æDCÉÏ×öÍ¬ÑùµÄÍ¬ĞÄÔ²Í¼Ïó
+////	CDC dcMem;                                                  //ç”¨äºç¼“å†²ä½œå›¾çš„å†…å­˜DC
+////	CBitmap bmp;                                                 //å†…å­˜ä¸­æ‰¿è½½ä¸´æ—¶å›¾è±¡çš„ä½å›¾
+////	dcMem.CreateCompatibleDC(pDC);               //ä¾é™„çª—å£DCåˆ›å»ºå…¼å®¹å†…å­˜DC
+////	bmp.CreateCompatibleBitmap(&dcMem,rect.right*1000,rect.bottom*1000);//åˆ›å»ºå…¼å®¹ä½å›¾
+////	dcMem.SelectObject(&bmp);                          //å°†ä½å›¾é€‰æ‹©è¿›å†…å­˜DC
+////	dcMem.FillSolidRect(&rect,pDC->GetBkColor());//æŒ‰åŸæ¥èƒŒæ™¯å¡«å……å®¢æˆ·åŒºï¼Œä¸ç„¶ä¼šæ˜¯é»‘è‰²
+////	//for(int i=20;i>0;i--)                                          //åœ¨å†…å­˜DCä¸ŠåšåŒæ ·çš„åŒå¿ƒåœ†å›¾è±¡
 ////	//{
 ////	//	ellipseRect.SetRect(ptCenter,ptCenter);
 ////	//	ellipseRect.InflateRect(i*10,i*10);
@@ -1308,9 +1308,9 @@ void CReduceMeasurementDlg::OnPaint()
 ////	dcMem.SelectObject(oldbrush);
 ////
 ////
-////	pDC->BitBlt(0,0,rect.right ,rect.bottom ,&dcMem,0,0,SRCCOPY);//½«ÄÚ´æDCÉÏµÄÍ¼Ïó¿½±´µ½Ç°Ì¨
-////	dcMem.DeleteDC();                                       //É¾³ıDC
-////	bmp.DeleteObject();                                        //É¾³ıÎ»Í¼
+////	pDC->BitBlt(0,0,rect.right ,rect.bottom ,&dcMem,0,0,SRCCOPY);//å°†å†…å­˜DCä¸Šçš„å›¾è±¡æ‹·è´åˆ°å‰å°
+////	dcMem.DeleteDC();                                       //åˆ é™¤DC
+////	bmp.DeleteObject();                                        //åˆ é™¤ä½å›¾
 ////	pWnd->ReleaseDC(pDC); 
 ////
 ////pWnd->EndPaint(&paintStruct);
@@ -1406,57 +1406,57 @@ void CReduceMeasurementDlg::OnPaint()
 
  //long nWidth=rect.right;
  //long nHigth=rect.bottom;
- //CDC tempdc;//B×À×Ó
- //CBitmap MemBitmap;//ĞÂ×À²¼
- //CBitmap*OldBitmap;//¾É×À²¼
+ //CDC tempdc;//Bæ¡Œå­
+ //CBitmap MemBitmap;//æ–°æ¡Œå¸ƒ
+ //CBitmap*OldBitmap;//æ—§æ¡Œå¸ƒ
 
- //tempdc.CreateCompatibleDC(pDC); //ÊµÌå»¯B×À×Ó
- //MemBitmap.CreateCompatibleBitmap(pDC,nWidth,nHigth);//ÊµÌå»¯¸øBÊ¹ÓÃµÄ×À²¼
- ////ÕâÀïÊÇ¿½±´ÁËAµÄÎ»Í¼£¬×Ô¼ºÓÃÕÅÍ¼Æ¬Ò²ĞĞ£¬´óĞ¡×¢ÒâÏÂ
+ //tempdc.CreateCompatibleDC(pDC); //å®ä½“åŒ–Bæ¡Œå­
+ //MemBitmap.CreateCompatibleBitmap(pDC,nWidth,nHigth);//å®ä½“åŒ–ç»™Bä½¿ç”¨çš„æ¡Œå¸ƒ
+ ////è¿™é‡Œæ˜¯æ‹·è´äº†Açš„ä½å›¾ï¼Œè‡ªå·±ç”¨å¼ å›¾ç‰‡ä¹Ÿè¡Œï¼Œå¤§å°æ³¨æ„ä¸‹
  //OldBitmap=tempdc.SelectObject(&MemBitmap);
- ////¸øBÊ¹ÓÃ
+ ////ç»™Bä½¿ç”¨
  //tempdc.FillSolidRect(0,0,nWidth,nHigth,RGB(0,255,255));
- ////Ä¬ÈÏºÚÉ«£¬×Ô¼º°´Ğè¸Ä±ä
+ ////é»˜è®¤é»‘è‰²ï¼Œè‡ªå·±æŒ‰éœ€æ”¹å˜
  //	tempdc.MoveTo(0 ,rect.bottom/4); 
 	//tempdc.LineTo(rect.right ,rect.bottom/4);
 
 	//tempdc.MoveTo(rect.right/2  ,0); 
 	//tempdc.LineTo(rect.right/2 ,rect.bottom);
  ////...............
- ////ÔÚB×À²¼ÉÏ»­»­£¬tempdc
+ ////åœ¨Bæ¡Œå¸ƒä¸Šç”»ç”»ï¼Œtempdc
  //pDC->BitBlt(0,0,nWidth,nHigth,&tempdc,0,0,SRCCOPY);
- ////¿½±´¸øA
+ ////æ‹·è´ç»™A
  //tempdc.SelectObject(OldBitmap);
- ////»Ö¸´BÔ­ÓĞµÄ×À²¼£¨Ï°¹ß°É£¬¾ÍÏñÉêÇëÄÚ´æºó¼ÇµÃÊÍ·Å£©
- ////É¾³ıÁÙÊ±¶ÔÏó
+ ////æ¢å¤BåŸæœ‰çš„æ¡Œå¸ƒï¼ˆä¹ æƒ¯å§ï¼Œå°±åƒç”³è¯·å†…å­˜åè®°å¾—é‡Šæ”¾ï¼‰
+ ////åˆ é™¤ä¸´æ—¶å¯¹è±¡
  //MemBitmap.DeleteObject();
  //tempdc.DeleteDC();
 
-	 // CDC   MemDC;   //Ê×ÏÈ¶¨ÒåÒ»¸öÏÔÊ¾Éè±¸¶ÔÏó  
-  //CBitmap   MemBitmap;//¶¨ÒåÒ»¸öÎ»Í¼¶ÔÏó  
+	 // CDC   MemDC;   //é¦–å…ˆå®šä¹‰ä¸€ä¸ªæ˜¾ç¤ºè®¾å¤‡å¯¹è±¡  
+  //CBitmap   MemBitmap;//å®šä¹‰ä¸€ä¸ªä½å›¾å¯¹è±¡  
   // 
-  ////Ëæºó½¨Á¢ÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÄÚ´æÏÔÊ¾Éè±¸  
+  ////éšåå»ºç«‹ä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡  
   //MemDC.CreateCompatibleDC(NULL);  
-  ////ÕâÊ±»¹²»ÄÜ»æÍ¼£¬ÒòÎªÃ»ÓĞµØ·½»­   ^_^  
-  ////ÏÂÃæ½¨Á¢Ò»¸öÓëÆÁÄ»ÏÔÊ¾¼æÈİµÄÎ»Í¼£¬ÖÁÓÚÎ»Í¼µÄ´óĞ¡Âï£¬¿ÉÒÔÓÃ´°¿ÚµÄ´óĞ¡  
+  ////è¿™æ—¶è¿˜ä¸èƒ½ç»˜å›¾ï¼Œå› ä¸ºæ²¡æœ‰åœ°æ–¹ç”»   ^_^  
+  ////ä¸‹é¢å»ºç«‹ä¸€ä¸ªä¸å±å¹•æ˜¾ç¤ºå…¼å®¹çš„ä½å›¾ï¼Œè‡³äºä½å›¾çš„å¤§å°å˜›ï¼Œå¯ä»¥ç”¨çª—å£çš„å¤§å°  
   //MemBitmap.CreateCompatibleBitmap(pDC,nWidth,nHeight);  
   //   
-  ////½«Î»Í¼Ñ¡Èëµ½ÄÚ´æÏÔÊ¾Éè±¸ÖĞ  
-  ////Ö»ÓĞÑ¡ÈëÁËÎ»Í¼µÄÄÚ´æÏÔÊ¾Éè±¸²ÅÓĞµØ·½»æÍ¼£¬»­µ½Ö¸¶¨µÄÎ»Í¼ÉÏ  
+  ////å°†ä½å›¾é€‰å…¥åˆ°å†…å­˜æ˜¾ç¤ºè®¾å¤‡ä¸­  
+  ////åªæœ‰é€‰å…¥äº†ä½å›¾çš„å†…å­˜æ˜¾ç¤ºè®¾å¤‡æ‰æœ‰åœ°æ–¹ç»˜å›¾ï¼Œç”»åˆ°æŒ‡å®šçš„ä½å›¾ä¸Š  
   //CBitmap   *pOldBit=MemDC.SelectObject(&MemBitmap);  
   // 
-  ////ÏÈÓÃ±³¾°É«½«Î»Í¼Çå³ı¸É¾»£¬ÕâÀïÎÒÓÃµÄÊÇ°×É«×÷Îª±³¾°  
-  ////ÄãÒ²¿ÉÒÔÓÃ×Ô¼ºÓ¦¸ÃÓÃµÄÑÕÉ«  
+  ////å…ˆç”¨èƒŒæ™¯è‰²å°†ä½å›¾æ¸…é™¤å¹²å‡€ï¼Œè¿™é‡Œæˆ‘ç”¨çš„æ˜¯ç™½è‰²ä½œä¸ºèƒŒæ™¯  
+  ////ä½ ä¹Ÿå¯ä»¥ç”¨è‡ªå·±åº”è¯¥ç”¨çš„é¢œè‰²  
   //MemDC.FillSolidRect(0,0,nWidth,nHeight,RGB(255,255,255));  
   // 
-  ////»æÍ¼  
-  //MemDC.MoveTo(¡­¡­);  
-  //MemDC.LineTo(¡­¡­);  
+  ////ç»˜å›¾  
+  //MemDC.MoveTo(â€¦â€¦);  
+  //MemDC.LineTo(â€¦â€¦);  
   // 
-  ////½«ÄÚ´æÖĞµÄÍ¼¿½±´µ½ÆÁÄ»ÉÏ½øĞĞÏÔÊ¾  
+  ////å°†å†…å­˜ä¸­çš„å›¾æ‹·è´åˆ°å±å¹•ä¸Šè¿›è¡Œæ˜¾ç¤º  
   //pDC->BitBlt(0,0,nWidth,nHeight,&MemDC,0,0,SRCCOPY);  
   // 
-  ////»æÍ¼Íê³ÉºóµÄÇåÀí  
+  ////ç»˜å›¾å®Œæˆåçš„æ¸…ç†  
   //MemBitmap.DeleteObject();  
   //MemDC.DeleteDC();  
    
@@ -1464,7 +1464,7 @@ void CReduceMeasurementDlg::OnPaint()
 
 void CReduceMeasurementDlg::OnStnClickedStcTitle()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 
 
 	intExitFlag++;
@@ -1472,7 +1472,7 @@ void CReduceMeasurementDlg::OnStnClickedStcTitle()
 }
 void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	double data=0.0;
 	CString str;
 //	CWnd   *pWnd   =  GetDlgItem(IDC_STC_IMAGE);  
@@ -1497,7 +1497,7 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 	//	//	//FlagCount=0;
 	//	//	m_DIR=m_DIR!=0?0:1;
 	//	//	API_GPIO_Output(1, m_DIR);
-	//	//	m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ	
+	//	//	m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 	
 	//	//}
 	//	//else if(FlagCount>200&&FlagCount<400)
 	//	//{
@@ -1536,13 +1536,13 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 
 	//	if(RunFlag)
 	//	{
-	//		API_GPIO_Input(2,&Level);//¶ÁÍ£Ö¹ĞÅºÅ
+	//		API_GPIO_Input(2,&Level);//è¯»åœæ­¢ä¿¡å·
 	//		if(Level==0)
 	//		{       
 	//			RunFlag=false;
 	//			API_GPIO_Output(2, 0);
 	//			CW=0;
-	//			str.Format(L"²É¼¯ÊıÁ¿£º%d\n",FlagCount);
+	//			str.Format(L"é‡‡é›†æ•°é‡ï¼š%d\n",FlagCount);
 	//			TRACE(_T("%s"),str);
 	//			FlagCount=0;
 	//			Invalidate();
@@ -1553,12 +1553,12 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 	//			//	TRACE(_T("%s"),ss);
 	//			//	//str.Append(ss);
 	//			//}
-	//			//str1.append (str2);   //½«str2Á¬½Óµ½str1ºó
+	//			//str1.append (str2);   //å°†str2è¿æ¥åˆ°str1å
 	//			//TRACE(_T("%s"),str);
-	//			TRACE0( "Í£Ö¹ĞÅºÅ¡­¡­\n"  );
+	//			TRACE0( "åœæ­¢ä¿¡å·â€¦â€¦\n"  );
 
 	//		}
-	//		API_GPIO_Input(1,&Level);//¶Á·½ÏòĞÅºÅ
+	//		API_GPIO_Input(1,&Level);//è¯»æ–¹å‘ä¿¡å·
 	//		if(Level==0)
 	//		{
 	//			revbuf=m_pSerial->Command((BYTE*)buf,sizeof(buf),&revlen);
@@ -1568,13 +1568,13 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 	//			//API_GPIO_Output(1,CW);
 	//			//API_GPIO_Output(1,1);
 	//			FlagCount=0;
-	//			m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+	//			m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 	//			//hDlg->Invalidate();
-	//			TRACE0( "·´ÏòĞÅºÅ¡­¡­\n"  );
+	//			TRACE0( "åå‘ä¿¡å·â€¦â€¦\n"  );
 	//		}
 	//		if(CW==1)
 	//		{
-	//			API_GPIO_Input(0,&Level);//¶Á²É¼¯ĞÅºÅ
+	//			API_GPIO_Input(0,&Level);//è¯»é‡‡é›†ä¿¡å·
 	//			if(Level==0 && DropFlag==true)
 	//			{
 	//				DropFlag=false;
@@ -1599,7 +1599,7 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 	//				////if(CW==1)
 	//				////{
 	//				//
-	//				////str.Format(L"²É¼¯ĞòºÅ£º%d\n",hDlg->FlagCount);
+	//				////str.Format(L"é‡‡é›†åºå·ï¼š%d\n",hDlg->FlagCount);
 	//				////TRACE(_T("%s"),str);
 	//				m_Array.Add(data);
 	//				//hDlg->Invalidate();
@@ -1635,7 +1635,7 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 		//GetStandardPos(&m_Array,&s1,&s2,&s3);
 		if(theApp.AppFirstSectionStart!=0&&theApp.AppSecondSectionFinish!=0)
 		{
-			//str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal ,FlagCount,m_SendCout);
+			//str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal ,FlagCount,m_SendCout);
 			//GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 			//TRACE(_T("%s"),str);
 			//Invalidate();
@@ -1660,14 +1660,14 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 			theApp.AppMeasurementVal.Format(L"%.3f",v3);
 			theApp.AppDifferenceVal.Format(L"%.3f",v3-v4);
 
-			str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\n±ê×¼²î£º%s\nµÚÒ»µã£º%d\nµÚ¶şµã£º%d\nµÚÒ»µãÖµ£º%.3f\nµÚ¶şµãÖµ£º%.3f\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2 ,FlagCount,m_SendCout);
+			str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\næ ‡å‡†å·®ï¼š%s\nç¬¬ä¸€ç‚¹ï¼š%d\nç¬¬äºŒç‚¹ï¼š%d\nç¬¬ä¸€ç‚¹å€¼ï¼š%.3f\nç¬¬äºŒç‚¹å€¼ï¼š%.3f\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2 ,FlagCount,m_SendCout);
 			GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 			TRACE(_T("%s"),str);
 			Invalidate();
 		}
 		else
 		{
-			str.Format(L"±ê×¼Öµ£º%s\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,FlagCount,m_SendCout);
+			str.Format(L"æ ‡å‡†å€¼ï¼š%s\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,FlagCount,m_SendCout);
 			GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 			TRACE(_T("%s"),str);
 			Invalidate();
@@ -1681,7 +1681,7 @@ void CReduceMeasurementDlg::OnTimer(UINT_PTR nIDEvent)
 
 void CReduceMeasurementDlg::OnClose()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	
 
 	CDialog::OnClose();
@@ -1693,7 +1693,7 @@ double CReduceMeasurementDlg::GetValue(void)
 	short rev=0;
 
 	BYTE* bufdata=NULL;
-	//½«½ÓÊÕµÄ»º³åÇø¿½±´µ½pRecvBufÖÖ
+	//å°†æ¥æ”¶çš„ç¼“å†²åŒºæ‹·è´åˆ°pRecvBufç§
 	DWORD dwStart = GetTickCount();
 	DWORD dwEnd = 0;
 	
@@ -1727,8 +1727,8 @@ double CReduceMeasurementDlg::GetValue(void)
 /*
 void CReduceMeasurementDlg::OnBnClickedButTest()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	//m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	//m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 	//m_DIR=0;
 	//API_GPIO_Output(1,m_DIR);
 	//SetTimer(1,100,NULL);
@@ -1739,10 +1739,10 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
 	{
-		// TODO: ÔÚ´Ë·ÅÖÃ´¦ÀíºÎÊ±ÓÃ
-		//  ¡°È·¶¨¡±À´¹Ø±Õ¶Ô»°¿òµÄ´úÂë
+		// TODO: åœ¨æ­¤æ”¾ç½®å¤„ç†ä½•æ—¶ç”¨
+		//  â€œç¡®å®šâ€æ¥å…³é—­å¯¹è¯æ¡†çš„ä»£ç 
 		((CButton*)GetDlgItem(IDC_BUT_TEST))->EnableWindow(false);
-		TRACE0( "¿ªÊ¼ĞÅºÅ¡­¡­\n"  );
+		TRACE0( "å¼€å§‹ä¿¡å·â€¦â€¦\n"  );
 		//RunFlag=1;
 		//m_dwRunFlag=1;
 		theApp.AppTempVal=0.0;
@@ -1756,7 +1756,7 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 		API_GPIO_Output(0,0);
 		theApp.AppPosStart=0;
 		theApp.AppPosFinish=0; 
-		m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+		m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 
 		//API_GPIO_Output(2, 1);
 		//m_hThread = CreateThread(NULL,0,ThreadFunc,this,0,&m_dwThreadID);
@@ -1766,8 +1766,8 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 
 void CReduceMeasurementDlg::OnBnClickedButTest()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	//m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	//m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 	//m_DIR=0;
 	//API_GPIO_Output(1,m_DIR);
 	//SetTimer(1,100,NULL);
@@ -1778,10 +1778,10 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
 	{
-		// TODO: ÔÚ´Ë·ÅÖÃ´¦ÀíºÎÊ±ÓÃ
-		//  ¡°È·¶¨¡±À´¹Ø±Õ¶Ô»°¿òµÄ´úÂë
+		// TODO: åœ¨æ­¤æ”¾ç½®å¤„ç†ä½•æ—¶ç”¨
+		//  â€œç¡®å®šâ€æ¥å…³é—­å¯¹è¯æ¡†çš„ä»£ç 
 		((CButton*)GetDlgItem(IDC_BUT_TEST))->EnableWindow(false);
-		TRACE0( "¿ªÊ¼ĞÅºÅ¡­¡­\n"  );
+		TRACE0( "å¼€å§‹ä¿¡å·â€¦â€¦\n"  );
 		//RunFlag=1;
 		//m_dwRunFlag=1;
 		theApp.AppTempVal=0.0;
@@ -1794,7 +1794,7 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 		API_GPIO_Output(1,0);
 		theApp.AppPosStart=0;
 		theApp.AppPosFinish=0; 
-		m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+		m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 
 		//API_GPIO_Output(2, 1);
 		//m_hThread = CreateThread(NULL,0,ThreadFunc,this,0,&m_dwThreadID);
@@ -1803,7 +1803,7 @@ void CReduceMeasurementDlg::OnBnClickedButTest()
 
 void CReduceMeasurementDlg::OnBnClickedButExtended()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	CTestDlg dlg;
 	int Num;
 	CString str;
@@ -1841,45 +1841,45 @@ void CReduceMeasurementDlg::OnBnClickedButExtended()
 	////FileWrite(_T("\\ResidentFlash2\\GUI\\") +strDate +_T(".txt"),m_Temp);
 	//
 	//FileWrite(ReturnPath() +strDate +_T(".txt"),m_Temp);
-	////FileWrite(_T("\\Ó²ÅÌ\\") +strDate +_T(".txt"),m_Temp);
+	////FileWrite(_T("\\ç¡¬ç›˜\\") +strDate +_T(".txt"),m_Temp);
 
 
 }
 
 int CReduceMeasurementDlg::FileWrite(CString filename, CString content)
 {
-		  	HANDLE hFile = INVALID_HANDLE_VALUE;	// ÎÄ¼ş¾ä±ú 
-	// ´´½¨Ò»¸öÎÄ¼ş»ò´ò¿ªÒ»¸öÎÄ¼ş
+		  	HANDLE hFile = INVALID_HANDLE_VALUE;	// æ–‡ä»¶å¥æŸ„ 
+	// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶æˆ–æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	hFile = CreateFile(filename, GENERIC_READ | GENERIC_WRITE, 0, 
 					   NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		//AfxMessageBox(_T("´´½¨ÎÄ¼şÊ§°Ü!"));
+		//AfxMessageBox(_T("åˆ›å»ºæ–‡ä»¶å¤±è´¥!"));
 		return -1;
 	}
 
 	DWORD len,actlen;
 	char *pcharbuff;
 
-	//len = content.GetLength();							// È¡µÃÊäÈë×Ö·û´®µÄ³¤¶È
+	//len = content.GetLength();							// å–å¾—è¾“å…¥å­—ç¬¦ä¸²çš„é•¿åº¦
 	len=CStringA(content).GetLength();
 
 	pcharbuff = new char[len];
-	LPTSTR pStr = content.GetBuffer(len);					// È¡µÃÊäÈë×Ö·û´®µÄ»º³åÇøÖ¸Õë
+	LPTSTR pStr = content.GetBuffer(len);					// å–å¾—è¾“å…¥å­—ç¬¦ä¸²çš„ç¼“å†²åŒºæŒ‡é’ˆ
 
-	// ½« Unicode µÄ CString ×ª»»Îª char ĞÍ
+	// å°† Unicode çš„ CString è½¬æ¢ä¸º char å‹
 	WideCharToMultiByte(CP_ACP, 0, pStr, len, pcharbuff, len, NULL, NULL);
 	content.ReleaseBuffer();
 
-	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_END);	// ÒÆ¶¯ÎÄ¼şÖ¸Õëµ½ÎÄ¼ş¿ªÍ·
+	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_END);	// ç§»åŠ¨æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å¼€å¤´
 	if (ret == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("½«ÎÄ¼şÖ¸ÕëÒÆÖÁÎÄ¼ş¿ªÍ·Ê§°Ü!"));
+		//AfxMessageBox(_T("å°†æ–‡ä»¶æŒ‡é’ˆç§»è‡³æ–‡ä»¶å¼€å¤´å¤±è´¥!"));
 		delete[] pcharbuff;
 		return -2;	
 	}
 
-	ret = WriteFile(hFile, pcharbuff, len, &actlen, NULL);	// ½«Êı¾İĞ´ÈëÎÄ¼şÖĞ 
+	ret = WriteFile(hFile, pcharbuff, len, &actlen, NULL);	// å°†æ•°æ®å†™å…¥æ–‡ä»¶ä¸­ 
 	
 	if (pcharbuff != NULL) 
 		delete[] pcharbuff;
@@ -1887,62 +1887,62 @@ int CReduceMeasurementDlg::FileWrite(CString filename, CString content)
 	CloseHandle(hFile);
 	if (ret == TRUE)
 		return 0;
-		//AfxMessageBox(_T("Ğ´ÎÄ¼ş³É¹¦!"));	
+		//AfxMessageBox(_T("å†™æ–‡ä»¶æˆåŠŸ!"));	
 	else
 		return -3;
-		//AfxMessageBox(_T("Ğ´ÎÄ¼şÊ§°Ü!"));
+		//AfxMessageBox(_T("å†™æ–‡ä»¶å¤±è´¥!"));
 	return 0;
 }
 
 int CReduceMeasurementDlg::FileRead(CString filename,CString* content)
 {
 	int lRet;
-	HANDLE hFile = INVALID_HANDLE_VALUE;	// ÎÄ¼ş¾ä±ú 
+	HANDLE hFile = INVALID_HANDLE_VALUE;	// æ–‡ä»¶å¥æŸ„ 
 	if(::GetFileAttributes(filename)==0xFFFFFFFF)
 	{
-	//::AfxMessageBox(_T("ÎÄ¼ş²»´æÔÚ"));
+	//::AfxMessageBox(_T("æ–‡ä»¶ä¸å­˜åœ¨"));
 		return -5;
 	}
-	// ´´½¨Ò»¸öÎÄ¼ş»ò´ò¿ªÒ»¸öÎÄ¼ş
+	// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶æˆ–æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	hFile = CreateFile(filename, GENERIC_READ | GENERIC_WRITE, 0, 
 					   NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		//AfxMessageBox(_T("´ò¿ªÎÄ¼şÊ§°Ü!"));
+		//AfxMessageBox(_T("æ‰“å¼€æ–‡ä»¶å¤±è´¥!"));
 		return -1;
 	}
 
 	DWORD filelen,actlen;
 	char *pcharbuff;
 	
-	filelen = GetFileSize(hFile, NULL);							// »ñÈ¡ÎÄ¼ş´óĞ¡
+	filelen = GetFileSize(hFile, NULL);							// è·å–æ–‡ä»¶å¤§å°
 	if (filelen == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("»ñÈ¡ÎÄ¼ş´óĞ¡Ê§°Ü!"));
+		//AfxMessageBox(_T("è·å–æ–‡ä»¶å¤§å°å¤±è´¥!"));
 		return -2;	
 	}
 
-	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_BEGIN);		// ÒÆ¶¯ÎÄ¼şÖ¸Õëµ½ÎÄ¼ş¿ªÍ·
+	BOOL ret = SetFilePointer(hFile, 0, NULL, FILE_BEGIN);		// ç§»åŠ¨æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å¼€å¤´
 	if (ret == 0xFFFFFFFF)
 	{
-		//AfxMessageBox(_T("½«ÎÄ¼şÖ¸ÕëÒÆÖÁÎÄ¼ş¿ªÍ·Ê§°Ü!"));
+		//AfxMessageBox(_T("å°†æ–‡ä»¶æŒ‡é’ˆç§»è‡³æ–‡ä»¶å¼€å¤´å¤±è´¥!"));
 		return -3;	
 	}
 
 	pcharbuff = new char[filelen];
-	ret = ReadFile(hFile, pcharbuff, filelen, &actlen, NULL);	// ´ÓÎÄ¼şÖĞ¶Á³öÊı¾İ 
+	ret = ReadFile(hFile, pcharbuff, filelen, &actlen, NULL);	// ä»æ–‡ä»¶ä¸­è¯»å‡ºæ•°æ® 
 	if (ret == TRUE)
 	{
 		LPTSTR pStr = content->GetBuffer(filelen);	
-		// ½«×Ö½Ú×ª»¯Îª Unicode ×Ö·û´®
+		// å°†å­—èŠ‚è½¬åŒ–ä¸º Unicode å­—ç¬¦ä¸²
 		MultiByteToWideChar(CP_ACP, 0, pcharbuff, filelen, pStr, filelen);
 		content->ReleaseBuffer();
-		//AfxMessageBox(_T("¶ÁÎÄ¼ş³É¹¦!"));	
+		//AfxMessageBox(_T("è¯»æ–‡ä»¶æˆåŠŸ!"));	
 		lRet=0;
 	}
 	else
 	{
-		//AfxMessageBox(_T("¶ÁÎÄ¼şÊ§°Ü!"));	
+		//AfxMessageBox(_T("è¯»æ–‡ä»¶å¤±è´¥!"));	
 		lRet=-4;
 	}
 
@@ -1987,29 +1987,29 @@ void CReduceMeasurementDlg::OnDestroy()
 {
 	CDialog::OnDestroy();
 
-	// TODO: ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
 	API_GPIO_Output(0, 0);
 	API_GPIO_Output(1, 0);
 	API_GPIO_Output(2, 0);
 	API_GPIO_Output(3, 0);
 
-//»æÍ¼Íê³ÉºóµÄÇåÀí
+//ç»˜å›¾å®Œæˆåçš„æ¸…ç†
 MemBitmap.DeleteObject(); 
 MemDC.SelectObject(pOldBit);
 MemDC.DeleteDC();
 
 	//KillTimer(1);
 
-	//¹Ø±Õ´®¿Ú
+	//å…³é—­ä¸²å£
 	if (m_pSerial != NULL)
 	{
-		//¹Ø±Õ´®¿Ú
+		//å…³é—­ä¸²å£
 		m_pSerial->ClosePort();
 
-		//ÊÍ·Å´®¿Ú¶ÔÏó
+		//é‡Šæ”¾ä¸²å£å¯¹è±¡
 		delete m_pSerial;
 		m_pSerial = NULL;
-		//AfxMessageBox(L"´®¿Ú¹Ø±Õ³É¹¦");
+		//AfxMessageBox(L"ä¸²å£å…³é—­æˆåŠŸ");
 	}
 	if (WaitForSingleObject(m_hThread,400) == WAIT_TIMEOUT)
 	{
@@ -2020,7 +2020,7 @@ MemDC.DeleteDC();
 
 double CReduceMeasurementDlg::GetMaxValue(CArray <double> *data, int dstart, int dfinish)
 {
-	int i,j;// Ñ­»·±äÁ¿  
+	int i,j;// å¾ªç¯å˜é‡  
     double dTemp;  
 	if(dstart<0||dfinish<0) return 0.0;
 	int dlen=(int)data->GetSize();
@@ -2034,14 +2034,14 @@ double CReduceMeasurementDlg::GetMaxValue(CArray <double> *data, int dstart, int
 	
     //TRACE(_T("\n"));
       
-    // ÓÃÃ°Åİ·¨¶ÔÊı×é½øĞĞÅÅĞò  
+    // ç”¨å†’æ³¡æ³•å¯¹æ•°ç»„è¿›è¡Œæ’åº  
     for (j = 0; j < dfinish-dstart ; j ++)  
     {  
         for (i = 0; i < dfinish-dstart - j; i ++)  
         {  
 			if (sdata[i] < sdata[i+1])  
             {  
-                // »¥»»  
+                // äº’æ¢  
 				dTemp = sdata[i];  
 				sdata[i]=sdata[i+1];
 				sdata[i+1]=dTemp;
@@ -2063,7 +2063,7 @@ double CReduceMeasurementDlg::GetMaxValue(CArray <double> *data, int dstart, int
 //int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int * start, int *middle,int * finish)
 int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int * start,int *  finish)
 {
-	int i,j,n=0;// Ñ­»·±äÁ¿  
+	int i,j,n=0;// å¾ªç¯å˜é‡  
 	int sPos[10];
 	int sCount=0;
 	int rstart=0,rfinish=0;
@@ -2077,7 +2077,7 @@ int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int * start,in
 	{
 		dTemp[i]=data->GetAt(i);
 	}
-	//È¡µÃÍ¼ĞÎÖÕµã
+	//å–å¾—å›¾å½¢ç»ˆç‚¹
 	for(i=dlen-4;i>=3;i--)
 	{
 		if(dTemp[i-2]>dTemp[i-1]&&(dTemp[i-1]-dTemp[i])>0.1&&(dTemp[i+1]-dTemp[i])>0.1&&dTemp[i+1]<dTemp[i+2])
@@ -2088,7 +2088,7 @@ int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int * start,in
 	}
     *finish =rfinish;
 
-	//È¡µÃÍ¼ĞÎÆğµã
+	//å–å¾—å›¾å½¢èµ·ç‚¹
 	for(i=3;i<rfinish-4;i++)
 	{
 		//if(fabs(dTemp[i-2]-(-327.67))<0.001 &&fabs(dTemp[i-1]-(-327.67))<0.001 &&fabs(dTemp[i]-(-327.67))<0.001&&fabs(dTemp[i+1]-(-327.67))<0.001&&fabs(dTemp[i+2]-(-327.67))<0.001)
@@ -2207,7 +2207,7 @@ int CReduceMeasurementDlg::GetStandardPos(CArray <double> * data, int * start,in
 
 void CReduceMeasurementDlg::OnBnClickedCheck1()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	if(BST_CHECKED==((CButton*)GetDlgItem(IDC_CHECK1))->GetCheck()) 
 	{
 		CW=1;
@@ -2220,21 +2220,21 @@ void CReduceMeasurementDlg::OnBnClickedCheck1()
 
 void CReduceMeasurementDlg::OnBnClickedCheck2()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	if(BST_CHECKED==((CButton*)GetDlgItem(IDC_CHECK2))->GetCheck()) 
 	{
 		theApp.AppStoragePath =ReturnPath();
 	}
 	else
 	{
-		theApp.AppStoragePath =_T("\\Ó²ÅÌ\\");
+		theApp.AppStoragePath =_T("\\ç¡¬ç›˜\\");
 	}
 	
 }
 /*
 void CReduceMeasurementDlg::OnBnClickedButLeft()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	API_GPIO_Output(0,1);
 	Sleep(1);
 	API_GPIO_Output(1,0);
@@ -2243,7 +2243,7 @@ void CReduceMeasurementDlg::OnBnClickedButLeft()
 
 void CReduceMeasurementDlg::OnBnClickedButRight()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	API_GPIO_Output(0,0);
 	Sleep(1);
 	API_GPIO_Output(1,1);
@@ -2252,16 +2252,16 @@ void CReduceMeasurementDlg::OnBnClickedButRight()
 */
 BOOL CReduceMeasurementDlg::PreTranslateMessage(MSG* pMsg)
 {
-	// TODO: ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO: åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	int buID;
-	buID= GetWindowLong(pMsg->hwnd,GWL_ID);//ÓÉ´°¿Ú¾ä±ú»ñµÃIDºÅ£¬GetWindowLongÎª»ñµÃ´°¿ÚµÄIDºÅ¡£
-	//CWnd* pWnd=WindowFromPoint(pMsg->pt); //»ñµÃÖ¸¶¨µã¾ä±ú
-	//buID=pWnd->GetDlgCtrlID();//»ñµÃ¸Ã¾ä±úµÄIDºÅ¡£
+	buID= GetWindowLong(pMsg->hwnd,GWL_ID);//ç”±çª—å£å¥æŸ„è·å¾—IDå·ï¼ŒGetWindowLongä¸ºè·å¾—çª—å£çš„IDå·ã€‚
+	//CWnd* pWnd=WindowFromPoint(pMsg->pt); //è·å¾—æŒ‡å®šç‚¹å¥æŸ„
+	//buID=pWnd->GetDlgCtrlID();//è·å¾—è¯¥å¥æŸ„çš„IDå·ã€‚
 	if(pMsg->message==WM_LBUTTONDOWN) 
 	{     
-		if(buID==IDC_BUT_LEFT) //°´ÏÂ
+		if(buID==IDC_BUT_LEFT) //æŒ‰ä¸‹
 		{  
-			//ÔÚÕâÀïÌí¼Óµ¥»÷°´ÏÂÊÂ¼şµÄ³ÌĞò
+			//åœ¨è¿™é‡Œæ·»åŠ å•å‡»æŒ‰ä¸‹äº‹ä»¶çš„ç¨‹åº
 			API_GPIO_Output(0,1);
 			Sleep(1);
 			API_GPIO_Output(1,0);
@@ -2277,7 +2277,7 @@ BOOL CReduceMeasurementDlg::PreTranslateMessage(MSG* pMsg)
 	{ 
 		if(buID==IDC_BUT_LEFT)
 		{  
-			//ÔÚÕâÀïÌí¼Óµ¥»÷ËÉ¿ªÊÂ¼şµÄ³ÌĞò
+			//åœ¨è¿™é‡Œæ·»åŠ å•å‡»æ¾å¼€äº‹ä»¶çš„ç¨‹åº
 			API_GPIO_Output(0,0);
 			Sleep(1);
 			API_GPIO_Output(1,0);
@@ -2294,19 +2294,19 @@ BOOL CReduceMeasurementDlg::PreTranslateMessage(MSG* pMsg)
 
 void CReduceMeasurementDlg::OnBnClickedButOpen()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
 	SipShowIM(SIPF_OFF); 
 
 	CString FileFlt = _T("data file(*.txt)|*.txt");
     FileFlt += _T("||");
     CFileDialog FileDlg(TRUE,NULL,NULL,OFN_HIDEREADONLY,FileFlt,this,0);
     //FileDlg.m_ofn.lpstrInitialDir =L"\\ResidentFlash2\\GUI";//ReturnPath();
-    FileDlg.m_ofn.lpstrTitle = L"Ñ¡ÔñÊı¾İ...";
+    FileDlg.m_ofn.lpstrTitle = L"é€‰æ‹©æ•°æ®...";
     INT_PTR nResponse = FileDlg.DoModal();
     if(nResponse == IDCANCEL)
         return;
-	//filePath = FileDlg.GetPathName();   // filePath¼´ÎªËù´ò¿ªµÄÎÄ¼şµÄÂ·¾¶  
-	//CString strFileName=GetOpenFileName(_T("Êı¾İÎÄ¼ş,*.txt"));
+	//filePath = FileDlg.GetPathName();   // filePathå³ä¸ºæ‰€æ‰“å¼€çš„æ–‡ä»¶çš„è·¯å¾„  
+	//CString strFileName=GetOpenFileName(_T("æ•°æ®æ–‡ä»¶,*.txt"));
 
 	double val,vTmp;
 	CString content;
@@ -2319,7 +2319,7 @@ void CReduceMeasurementDlg::OnBnClickedButOpen()
 	content.Empty();
 	dest.RemoveAll();
 
-	m_Array.RemoveAll();  //É¾³ıËùÓĞÔªËØ
+	m_Array.RemoveAll();  //åˆ é™¤æ‰€æœ‰å…ƒç´ 
 	//CString strFileName=_T("2015_1_4_CN-6118AB.txt");
 	//FileRead(ReturnPath() +strFileName,&content);
 	FileRead(strFilePath,&content);
@@ -2428,8 +2428,8 @@ void CReduceMeasurementDlg::OnBnClickedButOpen()
 			theApp.AppMeasurementVal.Format(L"%.3f",v3);
 			theApp.AppDifferenceVal.Format(L"%.3f",v3-v4);
 
-			//str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\nµÚÒ»µã£º%d\nµÚ¶şµã£º%d\nµÚÒ»µãÖµ£º%.3f\nµÚ¶şµãÖµ£º%.3f\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,s1,s2,v1,v2,FlagCount,m_SendCout);
-			str.Format(L"±ê×¼Öµ£º%s\n²âÁ¿Öµ£º%s\n²âÁ¿²î£º%s\nµÚÒ»µã£º%d\nµÚ¶şµã£º%d\nµÚÒ»µãÖµ£º%.3f\nµÚ¶şµãÖµ£º%.3f\n²É¼¯ÊıÁ¿£º%d\n·¢ËÍÊıÁ¿£º%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2,FlagCount,m_SendCout);
+			//str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\nç¬¬ä¸€ç‚¹ï¼š%d\nç¬¬äºŒç‚¹ï¼š%d\nç¬¬ä¸€ç‚¹å€¼ï¼š%.3f\nç¬¬äºŒç‚¹å€¼ï¼š%.3f\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,s1,s2,v1,v2,FlagCount,m_SendCout);
+			str.Format(L"æ ‡å‡†å€¼ï¼š%s\næµ‹é‡å€¼ï¼š%s\næµ‹é‡å·®ï¼š%s\nç¬¬ä¸€ç‚¹ï¼š%d\nç¬¬äºŒç‚¹ï¼š%d\nç¬¬ä¸€ç‚¹å€¼ï¼š%.3f\nç¬¬äºŒç‚¹å€¼ï¼š%.3f\né‡‡é›†æ•°é‡ï¼š%d\nå‘é€æ•°é‡ï¼š%d\n",theApp.AppStandardVal,theApp.AppMeasurementVal,theApp.AppDifferenceVal,s1,s2,v1,v2,FlagCount,m_SendCout);
 			GetDlgItem(IDC_STC_CONTENT)->SetWindowTextW(str);
 			TRACE(_T("%s"),str);
 			Invalidate();
@@ -2458,7 +2458,7 @@ void CReduceMeasurementDlg::OnBnClickedButOpen()
 BOOL CReduceMeasurementDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 {
 	/*
-	// TODO: ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO: åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	if((LOWORD(wParam)) == IDC_BUT_LEFT)
 	{
 		if((HIWORD(wParam)) == WM_LBUTTONDOWN){
